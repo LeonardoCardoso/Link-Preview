@@ -1,0 +1,89 @@
+.bar{
+	border-bottom: 1px solid #aeaeae;
+	background: #F5F5F5;
+	height: 40px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	float: left;
+	color: #333;
+    border-color: #999;
+	z-index: 1000;
+    
+}
+
+a{
+	text-decoration: none;
+}
+.bar img{
+	height: 30px;
+	margin: 5px 6px;
+}
+
+.center{
+	width: 90%;
+	margin: auto;
+	margin-top: 60px;
+	text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+	padding: 10px 20px;
+	text-align: justify;
+}
+
+.rectangle{
+	cursor: pointer;
+	color: white;
+}
+
+.rectangleHover{
+	opacity:0.6;
+	filter:alpha(opacity=60);
+}
+
+.feedback{
+	position: fixed;
+	bottom: -4px;
+	left: -4px;
+}
+
+.feed {
+	border: 1px solid #f2f2f2;
+	z-index: 1000;
+	color: #444444;
+	font: bold 11px Arial, sans-serif;
+	text-decoration: none;
+	text-shadow: 0 1px 0 white;
+	padding: 5px 7px 10px 11px;
+	background: #f2f2f2;
+	border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+	-moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0px 1px 2px rgba(0, 0, 0, 0.15);	
+	cursor: default;
+}
+
+.feed:active{
+	border-color: #4d90fe;
+	-moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.20);
+	cursor: default;
+}
+
+#feedbackOptions{
+	display: none;
+	z-index: 1004;
+}
+
+#canvas{
+	position:absolute;
+	left: 0;
+	top: 0;
+	z-index: 1001;
+	background-color: #000;
+	display:block;
+}
