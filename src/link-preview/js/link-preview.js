@@ -30,7 +30,7 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
                 }, 100);
             },
             keyup: function (e) {
-                if ((e.which === 13 || e.which === 32 || e.which === 17)) {
+                if ((e.which == 13 || e.which == 32 || e.which == 17)) {
                     scope.textCrawling(element.find('textarea')[0].value, scope, element, $compile);
                 }
             }
@@ -38,9 +38,9 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
         $(element.find('input')[0]).bind({ // Preview title
             keyup: function (e) {
-                if (e.which === 13) {
+                if (e.which == 13) {
                     scope.previewTitleEditing = false;
-                    $compile(element.contents())(scope);
+                    $compile(element.find('input')[0])(scope);
                 }
             }
         });
@@ -48,15 +48,15 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
         $(element.find('textarea')[1]).bind({ // Preview description
             keyup: function (e) {
-                if (e.which === 13) {
+                if (e.which == 13) {
                     scope.previewDescriptionEditing = false;
-                    $compile(element.contents())(scope);
+                    $compile(element.find('textarea')[1])(scope);
                 }
             }
         });
 
         scope.$watchGroup(
-            ['hideLoading', 'hidePreview', 'allowPosting', 'preview', 'isFetching', 'posts', 'noThumbnail'],
+            ['hideLoading', 'hidePreview', 'allowPosting', 'preview', 'isFetching', 'posts', 'noThumbnail', 'noImage'],
             function (newValues, oldValues, scope) {
                 scope.hideLoading = newValues[0];
                 scope.hidePreview = newValues[1];
@@ -65,10 +65,8 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
                 scope.isFetching = newValues[4];
                 scope.posts = newValues[5];
                 scope.noThumbnail = newValues[6];
-
-                $compile(element.contents())(scope);
+                scope.noImage = newValues[7];
             });
-
     };
 
     var defaultValues = function ($scope) {
@@ -105,6 +103,8 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
         $scope.noThumbnail = false;
 
+        $scope.noImage = false;
+
         $scope.previewTitleEditing = false;
 
         $scope.previewDescriptionEditing = false;
@@ -118,6 +118,8 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
         $scope.thubmnailText = angular.isDefined($scope.thubmnailText) ? $scope.thubmnailText : 'Choose a thumbnail';
         $scope.noThubmnailText = angular.isDefined($scope.noThubmnailText) ? $scope.noThubmnailText : 'No thumbnail';
         $scope.thumbnailPagination = angular.isDefined($scope.thumbnailPagination) ? $scope.thumbnailPagination : '%N of %N';
+        $scope.defaultTitle = angular.isDefined($scope.defaultTitle) ? $scope.defaultTitle : 'Enter a title';
+        $scope.defaultDescription = angular.isDefined($scope.defaultDescription) ? $scope.defaultDescription : 'Enter a description';
     };
 
     return {
@@ -132,7 +134,9 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
             loadingImage: '@limage',
             thubmnailText: '@ttext',
             noThubmnailText: '@nttext',
-            thumbnailPagination: '@tpage'
+            thumbnailPagination: '@tpage',
+            defaultTitle: '@dtitle',
+            defaultDescription: '@ddescription'
         },
         link: linker,
         controller: function ($scope) {
@@ -162,6 +166,8 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
                             console.log(data);
                             $scope.preview = data;
 
+                            $scope.hasEmptyInfo($scope);
+
                             $scope.hidePreview = false;
 
                             $scope.hideLoading = true;
@@ -174,15 +180,26 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
                             $scope.updatePagination($scope, currentImageIndex);
 
-                            $compile(element.contents())(scope);
+                            // $compile(element.contents())(scope);
                         });
 
                     }
                 }
-                $compile(element.contents())(scope);
+                // $compile(element.contents())(scope);
+            };
+
+            $scope.hasEmptyInfo = function ($scope) {
+                if ($scope.preview.title == "") {
+                    $scope.preview.title = $scope.defaultTitle;
+                }
+                if ($scope.preview.description == "") {
+                    $scope.preview.description = $scope.defaultDescription;
+                }
             };
 
             $scope.enablePagination = function ($scope) {
+                $scope.noThumbnail = $scope.preview.image === "";
+                $scope.noImage = $scope.preview.image === "";
                 $scope.leftArrowDisabled = $scope.preview.images.length == 1;
                 $scope.rightArrowDisabled = $scope.preview.images.length == 1;
             };
@@ -191,7 +208,30 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
                 var pagination = $scope.thumbnailPagination;
                 pagination = pagination.replace("%N", current);
                 pagination = pagination.replace("%N", $scope.preview.images.length);
-                $scope.thumbnailPagination = pagination;
+                $scope.thumbnailPaginationText = pagination;
+
+                $scope.leftArrowDisabled = current == 1;
+                $scope.rightArrowDisabled = current == $scope.preview.images.length;
+            };
+
+            $scope.previousImage = function () {
+                if (currentImageIndex != 1) {
+                    currentImageIndex--;
+                    $scope.setNewPreviewImage(currentImageIndex);
+                }
+            };
+
+            $scope.nextImage = function () {
+                if (currentImageIndex != $scope.preview.images.length) {
+                    currentImageIndex++;
+                    console.log(currentImageIndex);
+                    $scope.setNewPreviewImage(currentImageIndex);
+                }
+            };
+
+            $scope.setNewPreviewImage = function ($index) {
+                $scope.preview.image = $scope.preview.images[$index - 1];
+                $scope.updatePagination($scope, $index);
             };
 
             $scope.editPreviewTitle = function () {

@@ -59,7 +59,7 @@ class LinkPreview
             $pageUrl = $finalUrl;
 
             if (Content::isImage($pageUrl)) {
-                $images = $pageUrl;
+                $images = [$pageUrl];
             } else {
                 $urlData = $this->getPage($pageUrl);
                 if (!$urlData["content"] && strpos($pageUrl, "//www.") === false) {
@@ -112,7 +112,7 @@ class LinkPreview
                 $images = count($media) == 0 ? array(Content::extendedTrim($metaTags["image"])) : array($media[0]);
                 $videoIframe = $media[1];
 
-                if (count($images) == 0) {
+                if (count($images) == 0 || $images[0] === "") {
                     $images = Content::getImages($raw, $pageUrl, $imageQuantity);
                 }
                 if ($media != null && $media[0] != "" && $media[1] != "") {

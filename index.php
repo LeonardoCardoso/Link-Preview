@@ -22,8 +22,27 @@
     <a href="http://leocardz.com" target="_blank">
         <img src="demo/img/leocardz.png"/>
     </a>
+
 </div>
 <div class="row" ng-app="MyApp" ng-controller="MyController">
+    <div class="col-md-12 demo-github text-center">
+        <iframe src="https://ghbtns.com/github-btn.html?user=leonardocardoso&repo=link-preview&type=watch&count=true"
+                frameborder="0"
+                scrolling="0" width="170px" height="20px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=leonardocardoso&repo=link-preview&type=fork&count=true"
+                frameborder="0"
+                scrolling="0" width="170px" height="20px"></iframe>
+
+
+        <br/><br/>
+        http://web.media.mit.edu/~mres/<br/>
+        http://galleryproject.org/<br/>
+        http://lab.leocardz.com/facebook-link-preview-php--jquery/<br/>
+        http://www.youtube.com/watch?v=cv2mjAgFTaI<br/>
+        http://25.media.tumblr.com/076d514bbf5a5387f24a5896c26805af/tumblr_mlhc0rjpIc1rp499go2_400.gif<br/>
+
+    </div>
+
     <div class="col-sm-4 demo-col-padding">
         <link-preview
             ltext="Carregando"

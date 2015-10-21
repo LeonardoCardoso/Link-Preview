@@ -64,6 +64,8 @@ Attributes
 | 	 ttext 		|    thumbnailText    | Choose a thumbnail  |         					any string 		     			|
 | 	 nttext 	|   noThumbnailText   | 	No thumbnail  	|         					any string 		     			|
 |  	 tpage  	| thumbnailPagination |      %N of %N       |   any string, %N is the number reference of pagination    |
+|  	 dtitle  	| 	 defaultTitle	  | 	Enter a title	|         					any string 		     			|
+| ddescription  |  defaultDescription | Enter a description |         					any string 		     			|
 
 	<link-preview 
 			type="" 
@@ -74,7 +76,9 @@ Attributes
 			limage="" 
 			ltext="" 
 			btext="" 
-			bclass="" />
+			bclass=""
+			dtitle="" 
+			ddescription="" />
 
 
 

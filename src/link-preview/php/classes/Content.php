@@ -84,14 +84,14 @@ class Content
 
         $maxImages = $imageQuantity != -1 && $imageQuantity < count($content) ? $imageQuantity : count($content);
 
-        $images = array();
+        $images = [];
         for ($i = 0; $i < count($content); $i++) {
             if (!($size = @getimagesize($content[$i]))) {
                 continue;
             }
             $size = getimagesize($content[$i]);
             if ($size[0] > 40 && $size[1] > 15) {// avoids getting very small images
-                array_push($images, $content[$i]);
+                $images[] = $content[$i];
                 $maxImages--;
                 if ($maxImages == 0)
                     break;

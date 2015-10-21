@@ -19,8 +19,12 @@
 
         <div class="col-sm-12 lp-preview-title-wrap"
              ng-class="{'lg-display-hide': previewTitleEditing == true}">
+
             <span class="lp-preview-title col-md-11" ng-click="editPreviewTitle()">{{preview.title}}</span>
-            <span class="lp-preview-title-close col-md-1" ng-click="resetPreview()"><i class="fa fa-close"></i></span>
+
+            <span class="lp-preview-title-close col-md-1" ng-click="resetPreview()"><i
+                    class="fa fa-close"></i></span>
+
         </div>
 
         <input class="form-control col-sm-12 lp-preview-replace-title"
@@ -48,30 +52,32 @@
             <span class="lp-preview-thubmnail-buttons">
 
                 <button class="btn btn-sm"
+                        ng-click="previousImage()"
                         ng-class="{'btn-disabled': leftArrowDisabled == true, 'btn-default': leftArrowDisabled == false}"
                         type="button">
 
-                    <i class="fa fa-arrow-left"></i>
+                    <i class="fa fa-caret-left"></i>
 
                 </button>
 
                 <button class="btn btn-sm"
+                        ng-click="nextImage()"
                         ng-class="{'btn-disabled': rightArrowDisabled == true, 'btn-default': rightArrowDisabled == false}"
                         type="button">
 
-                    <i class="fa fa-arrow-right"></i>
+                    <i class="fa fa-caret-right"></i>
 
                 </button>
 
             </span>
 
-            <span class="lp-preview-thubmnail-pagination">{{thumbnailPagination}}</span>
+            <span class="lp-preview-thubmnail-pagination">{{thumbnailPaginationText}}</span>
 
             <span class="lp-preview-thubmnail-text">{{thubmnailText}}</span>
 
         </div>
 
-        <div class="col-sm-12 lp-preview-no-thubmnail">
+        <div class="col-sm-12 lp-preview-no-thubmnail" ng-class="{'lg-display-hide': noImage == true}">
 
             <label class="checkbox-inline lp-preview-no-thubmnail-text">
 
