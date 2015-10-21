@@ -25,19 +25,11 @@
 </div>
 <div class="row" ng-app="MyApp" ng-controller="MyController">
     <div class="col-sm-4 demo-col-padding">
-        <link-preview placeholder="Placeholder"
-                      ltext="Loading"
-                      type="right"
-                      iamount="10"
-                      button_text="Post"/>
-    </div>
-    <div class="col-sm-4 demo-col-padding">
-        <link-preview placeholder="What's in your mind?"
-                      limage="http://4.bp.blogspot.com/-L2Td-3QtUTo/UcbAvCQTYvI/AAAAAAAAAUM/Z4_GBilAu9g/s1600/spinner_64_3f4fa14117c586c002a98cd7c5fbb2d3.gif"
-                      btext="Submit"
-                      ltext=""
-                      ttext="Pick a image"
-                      bclass="default"/>
+        <!--        <link-preview placeholder="Placeholder"-->
+        <!--                      ltext="Loading"-->
+        <!--                      type="right"-->
+        <!--                      iamount="10"-->
+        <!--                      button_text="Post"/>-->
     </div>
     <div class="col-sm-4 demo-col-padding">
         <link-preview button_text="Generate"
@@ -45,6 +37,14 @@
                       ltext="Carregando"
                       tpage="%N de %N"
                       bclass="success"/>
+    </div>
+    <div class="col-sm-4 demo-col-padding">
+        <!--        <link-preview placeholder="What's in your mind?"-->
+        <!--                      limage="http://4.bp.blogspot.com/-L2Td-3QtUTo/UcbAvCQTYvI/AAAAAAAAAUM/Z4_GBilAu9g/s1600/spinner_64_3f4fa14117c586c002a98cd7c5fbb2d3.gif"-->
+        <!--                      btext="Submit"-->
+        <!--                      ltext=""-->
+        <!--                      ttext="Pick a image"-->
+        <!--                      bclass="default"/>-->
     </div>
 </div>
 </body>

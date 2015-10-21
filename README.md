@@ -1,9 +1,5 @@
-Facebook-Like Link Preview
+Link Preview (In Development)
 ==========================
-
-# [In Development]
-
-[Build Status] ...
 
 Developed by <a href='https://github.com/LeonardoCardoso' target='_blank'>@LeonardoCardoso</a>. 
 
@@ -14,7 +10,7 @@ Follow <a href='https://twitter.com/lc_link_preview' target='_blank'>@lc_link_pr
 The algorithm keeps tracking what you are typing in the status field and through regular expressions identifies a url. Thereafter, the text is in the field is passed to PHP that does all the work to analyze all the source code of the url found. If you enter more than one url, it will consider that the first one is the more relevant and it will create a preview.
 Once the source code of the url is obtained, regular expressions begin to seek out and capture relevant informations on it. These informations is basically the title page, the images contained therein, and a brief description of the content covered in the page.
 
-For mode details, visit http://lab.leocardz.com/link-preview/ ... [In progress]
+For mode details, visit http://lab.leocardz.com/link-preview/
 
 ![Link Preview](https://dl.dropboxusercontent.com/s/ocp2epovlj0w6w2/linkPreviewImageTimeLapse.png)
 
@@ -27,30 +23,34 @@ For mode details, visit http://lab.leocardz.com/link-preview/ ... [In progress]
 
 ## How to added to your project
 
-1 &bull; Scripts
+<b>1 &bull; Scripts</b>
 
-	<script src="js/link-preview.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" type="text/javascript"></script>
+        
+	<script src="src/link-preview/js/link-preview.js" type="text/javascript"></script>
+
+
+<b>2 &bull; Stylesheets</b>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    	
+	<link rel="stylesheet" type="text/css" href="src/link-preview/css/link-preview.css" />
 	
-... [In progress]
 
-2 &bull; Stylesheets
+<b>3 &bull; Configuration</b>
 
-... [In progress]
-
-3 &bull; Configuration
-
-Add the calendar module as a dependency to your application module:
+Add the link preview module as a dependency to your application module:
 
 	var app = angular.module('App', ['linkpreview'])
 	
 
 Add the directive inside your controller html:
 
-	<link-preview placeholder="What's in your mind?" type="right" />
-
-... [In progress]
-
-4 &bull; Customize
+	<link-preview placeholder="What's in your mind?" />
+	
 
 Attributes
 
@@ -80,7 +80,7 @@ Attributes
 
 
 
-5 &bull; Database
+<b>5 &bull; Database</b>
 
 To custom your database configurations, you just need to change the following values in [php/classes/Database.php](https://github.com/LeonardoCardoso/Facebook-Link-Preview/blob/master/php/classes/Database.php)
 
@@ -89,7 +89,7 @@ To custom your database configurations, you just need to change the following va
         $password = "";
         $database = "linkpreview";
         
-Make sure your columns are the same as those ones in [linkpreview.sql](https://github.com/LeonardoCardoso/Link-Preview/blob/master/linkpreview.sql).        
+Make sure your columns are the same as those ones in [linkpreview.sql](https://github.com/LeonardoCardoso/Link-Preview/blob/master/linkpreview.sql) or customize them.        
 
 
 ## Result Format
@@ -121,7 +121,8 @@ $ sudo port install php5-curl
 $ sudo apachectl restart
 ```
 
-Also where is 'src/link-preview/', you must change to the path on your server.
+Also where there is 'src/link-preview/' as part of a path of a <b>Javascript, CSS or image</b> file, 
+you must change to the path on your server.
 
 
 Contact

@@ -155,3 +155,7 @@
 .lp-posted-image img {
     width: 100%
 }
+
+.lg-display-hide {
+    display: none !important;
+}

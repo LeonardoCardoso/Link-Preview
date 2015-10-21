@@ -20,15 +20,17 @@ app.directive('linkPreview', function () {
             noThubmnailText: '@nttext',
             thumbnailPagination: '@tpage'
         },
+        link: function ($scope, elem, attrs) {
+            elem.bind("keyup", function () {
+                $scope.textCrawling(elem.find('textarea')[0].value);
+            });
+        },
         controller: function ($scope) {
-            $scope.preview = {
-                image: "http://leocardz.com/util/assets/images/lc.png",
-                title: "LeoCardz",
-                url: "http://leocardz.com",
-                description: "Everything about tech news, tutorials, development, projects, programming."
-            };
+            $scope.preview = null;
 
-            $scope.posts = [$scope.preview];
+            $scope.hidePreview = true;
+            $scope.hideLoading = true;
+            $scope.allowPost = false;
 
             $scope.type = angular.isDefined($scope.type) ? $scope.type : 'right';
             $scope.imageAmount = angular.isDefined($scope.imageAmount) ? $scope.imageAmount : -1;
@@ -39,6 +41,10 @@ app.directive('linkPreview', function () {
             $scope.thubmnailText = angular.isDefined($scope.thubmnailText) ? $scope.thubmnailText : 'Choose a thumbnail';
             $scope.noThubmnailText = angular.isDefined($scope.noThubmnailText) ? $scope.noThubmnailText : 'No thumbnail';
             $scope.thumbnailPagination = angular.isDefined($scope.thumbnailPagination) ? $scope.thumbnailPagination : '%N of %N';
+
+            $scope.textCrawling = function ($text) {
+                console.log($text);
+            }
         },
         // do not remove lp-* classes, you can customize them though
         templateUrl: 'src/link-preview/template/link-preview.html'
