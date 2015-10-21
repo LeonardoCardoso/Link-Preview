@@ -1,0 +1,56 @@
+<textarea
+        class="col-md-12 form-control lp-no-resize link-preview-{{type}}"
+        placeholder="{{placeholder}}">
+</textarea>
+
+<div class="col-md-12 lp-prepost">
+    <div class="col-sm-3 lp-preview-image">
+        <a href="{{preview.url}}" target="_blank">
+            <img ng-src="{{preview.image}}">
+        </a>
+    </div>
+    <div class="col-sm-9 lp-prepost-wrap">
+        <div class="col-sm-12 lp-preview-title">{{preview.title}}</div>
+        <div class="col-sm-12 lp-preview-cannonical-url">{{preview.url}}</div>
+        <div class="col-sm-12 lp-preview-description">{{preview.description}}</div>
+        <div class="col-sm-12 lp-preview-thubmnail">
+            <span class="lp-preview-thubmnail-buttons">
+                <button class="btn btn-default btn-sm" type="button"><i class="fa fa-arrow-left"></i></button>
+                <button class="btn btn-default btn-sm" type="button"><i class="fa fa-arrow-right"></i></button>
+            </span>
+            <span class="lp-preview-thubmnail-pagination">{{thumbnailPagination}}</span>
+            <span class="lp-preview-thubmnail-text">{{thubmnailText}}</span>
+        </div>
+        <div class="col-sm-12 lp-preview-no-thubmnail">
+            <label class="checkbox-inline lp-preview-no-thubmnail-text">
+                <input type="checkbox" value="">
+                <span>{{noThubmnailText}}</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 lp-button">
+    <span class="col-sm-4 lp-span">
+        <img class="lp-loading-image" src="{{loadingImage}}"/>
+        <span class="lp-loading-text">{{loadingText}}</span>
+    </span>
+    <span class="col-sm-8 lp-span">
+        <button class="pull-right btn btn-{{buttonClass}}" type="button">{{buttonText}}</button>
+    </span>
+</div>
+
+<div class="lp-outer-posted" ng-repeat="post in posts">
+    <a href="{{post.url}}" target="_blank">
+        <div class="col-md-12 lp-posted">
+            <div class="col-sm-3 lp-posted-image">
+                <img ng-src="{{post.image}}">
+            </div>
+            <div class="col-sm-9 lp-posted-wrap">
+                <div class="col-sm-12 lp-posted-title">{{post.title}}</div>
+                <div class="col-sm-12 lp-posted-cannonical-url">{{post.url}}</div>
+                <div class="col-sm-12 lp-posted-description">{{post.description}}</div>
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,14 @@
+.demo-bar {
+    border-bottom: 1px solid #aeaeae;
+    background: #F5F5F5;
+
+}
+
+.demo-bar img {
+    height: 30px;
+    margin: 5px 6px;
+}
+
+.demo-col-padding {
+    padding: 10px 30px !important;
+}

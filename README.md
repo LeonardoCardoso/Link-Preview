@@ -1,6 +1,8 @@
 Facebook-Like Link Preview
 ==========================
 
+# [In Development]
+
 [Build Status] ...
 
 Developed by <a href='https://github.com/LeonardoCardoso' target='_blank'>@LeonardoCardoso</a>. 
@@ -27,6 +29,8 @@ For mode details, visit http://lab.leocardz.com/link-preview/ ... [In progress]
 
 1 &bull; Scripts
 
+	<script src="js/link-preview.js" type="text/javascript"></script>
+	
 ... [In progress]
 
 2 &bull; Stylesheets
@@ -35,9 +39,48 @@ For mode details, visit http://lab.leocardz.com/link-preview/ ... [In progress]
 
 3 &bull; Configuration
 
+Add the calendar module as a dependency to your application module:
+
+	var app = angular.module('App', ['linkpreview'])
+	
+
+Add the directive inside your controller html:
+
+	<link-preview placeholder="What's in your mind?" type="right" />
+
 ... [In progress]
 
-4 &bull; Database
+4 &bull; Customize
+
+Attributes
+
+|     att       |    	  var         |    default value    |           			  possible values         		    |
+|:-------------:|:-------------------:|:-------------------:|:---------------------------------------------------------:|		
+|     type  	|        type         |       right         |      			right, left, top, bottom // TO-DO  			|
+|    amount		|     imageAmount     |         -1          |    						 any integer   		   	   	    |
+|  	 btext		|       buttonText    |       Post          |    						 any string   		   	   	    |
+| 	 bclass 	|       buttonClass   |       primary       |  default, primary, success, info, warning, danger, link 	|
+|  	 ltext		|    loadingText      |       Loading       |    						 any string   		   	   	    |
+| 	 limage 	|    loadingImage     |   	 empty.png      |         					any image url 					|
+|  placeholder  |      placeholder    |   an empty string   |    						 any string   		   	   	    |
+| 	 ttext 		|    thumbnailText    | Choose a thumbnail  |         					any string 		     			|
+| 	 nttext 	|   noThumbnailText   | 	No thumbnail  	|         					any string 		     			|
+|  	 tpage  	| thumbnailPagination |      %N of %N       |   any string, %N is the number reference of pagination    |
+
+	<link-preview 
+			type="" 
+			ttext="" 
+			tpage="" 
+			placeholder="" 
+			amount="" 
+			limage="" 
+			ltext="" 
+			btext="" 
+			bclass="" />
+
+
+
+5 &bull; Database
 
 To custom your database configurations, you just need to change the following values in [php/classes/Database.php](https://github.com/LeonardoCardoso/Facebook-Link-Preview/blob/master/php/classes/Database.php)
 
@@ -49,6 +92,20 @@ To custom your database configurations, you just need to change the following va
 Make sure your columns are the same as those ones in [linkpreview.sql](https://github.com/LeonardoCardoso/Link-Preview/blob/master/linkpreview.sql).        
 
 
+## Result Format
+
+```json
+	{  
+	   "title":"title",
+	   "url":"original url",
+	   "pageUrl":"page url",
+	   "canonicalUrl":"cannonical url",
+	   "description":"description",
+	   "images": "img1|img2|...",
+	   "video":"yes|no",
+	   "videoIframe":"video iframe if it is video"
+	}
+```
 
 ## Important
 Make sure the library <b>php5-curl</b> is installed and enabled on the server, either locally or remotely. 
@@ -64,6 +121,8 @@ $ sudo port install php5-curl
 $ sudo apachectl restart
 ```
 
+Also where is 'src/link-preview/', you must change to the path on your server.
+
 
 Contact
 =================================
@@ -76,6 +135,6 @@ Email: contact@leocardz.com
 License
 =================================
 
-	Copyright (c) 2014 Leonardo Cardoso (http://leocardz.com)
+	Copyright (c) 2015 Leonardo Cardoso (http://leocardz.com)
 	Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
 	and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.

@@ -1,0 +1,157 @@
+.lp-no-resize {
+    resize: none;
+}
+
+.lp-button {
+    padding: 0;
+    margin-top: 10px;
+}
+
+.lp-span {
+    padding: 0;
+}
+
+.lp-loading-image {
+    max-height: 20px;
+    padding-right: 5px;
+}
+
+.lp-loading-text {
+    font-size: 12px;
+}
+
+/** Preview */
+
+.lp-prepost {
+    margin-top: 10px;
+    border: 1px #eee solid;
+    padding: 10px 5px;
+}
+
+.lp-prepost-wrap {
+    padding: 0;
+}
+
+.lp-preview-cannonical-url {
+    color: #666;
+    font-size: 12px;
+    padding-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lp-preview-thubmnail {
+    padding-left: 5px;
+    margin-top: 5px;
+}
+
+.lp-preview-no-thubmnail {
+    padding-left: 5px;
+    margin-top: 5px;
+}
+
+.lp-preview-thubmnail-text {
+    color: #666;
+    font-size: 11px;
+    padding-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lp-preview-thubmnail-pagination {
+    font-size: 11px;
+    padding-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lp-preview-no-thubmnail-text {
+    font-size: 11px;
+    padding-left: 2px;
+}
+
+.lp-preview-no-thubmnail-text input {
+    margin: 1px 0 0 0 !important;
+}
+
+.lp-preview-no-thubmnail-text span {
+    padding-left: 15px;
+}
+
+.lp-preview-title {
+    font-weight: bold;
+    padding-left: 5px;
+    font-size: 15px;
+    word-break: break-word;
+}
+
+.lp-preview-description {
+    font-size: 13px;
+    word-break: break-word;
+    padding-left: 5px;
+    margin-top: 5px;
+}
+
+.lp-preview-title:hover, .lp-preview-description:hover {
+    cursor: pointer;
+    background-color: rgba(0, 122, 255, 0.22);
+}
+
+.lp-preview-image {
+    padding: 0px;
+}
+
+.lp-preview-image img {
+    width: 100%
+}
+
+/** Posted */
+
+.lp-outer-posted a, .lp-outer-posted a:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.lp-posted {
+    margin-top: 20px;
+    border: 1px #eee solid;
+    padding: 10px 5px;
+}
+
+.lp-posted-wrap {
+    padding: 0;
+}
+
+.lp-posted-cannonical-url {
+    color: #666;
+    font-size: 12px;
+    padding-left: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lp-posted-title {
+    font-weight: bold;
+    padding-left: 5px;
+    font-size: 15px;
+    word-break: break-word;
+}
+
+.lp-posted-description {
+    font-size: 13px;
+    word-break: break-word;
+    padding-left: 5px;
+    margin-top: 5px;
+}
+
+.lp-posted-image {
+    padding: 0px;
+}
+
+.lp-posted-image img {
+    width: 100%
+}

@@ -1,24 +1,19 @@
 <?php
 /**
- * Copyright (c) 2014 Leonardo Cardoso (http://leocardz.com)
+ * Copyright (c) 2015 Leonardo Cardoso (http://leocardz.com)
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- * Version: 1.3.0
+ * Version: 1.0.0
  */
 
 include_once "classes/Database.php";
 include_once "classes/SetUp.php";
+include_once "classes/Json.php";
 
 SetUp::headers();
 
-$delete = array(
-    "id" => $_POST["id"],
-);
+$header= "";
+$answer = Database::select();
 
-Database::delete($delete);
-
-echo mysql_error();
-
-
-
+echo Json::jsonSafe($answer, $header);
