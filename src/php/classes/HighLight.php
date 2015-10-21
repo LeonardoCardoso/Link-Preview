@@ -18,7 +18,7 @@ class HighLight {
 
     static function url($text){
         $text = " " . str_replace("\n", " ", $text);
-        if (preg_match_all(Regex::$urlRegex, $text, $matches)) {
+        if (preg_match_all(Regex::$URL_REGEX, $text, $matches)) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 $currentUrl = $matches[0][$i];
                 if ($currentUrl[0] == " ")

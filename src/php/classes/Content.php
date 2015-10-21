@@ -50,7 +50,7 @@ class Content
 
     static function isImage($url)
     {
-        if (preg_match(Regex::$imagePrefixRegex, $url))
+        if (preg_match(Regex::$IMAGE_PREFIX_REGEX, $url))
             return true;
         else
             return false;
@@ -59,15 +59,15 @@ class Content
     static function getImages($text, $url, $imageQuantity)
     {
         $content = array();
-        if (preg_match_all(Regex::$imageRegex, $text, $matching)) {
+        if (preg_match_all(Regex::$IMAGE_REGEX, $text, $matching)) {
 
             for ($i = 0; $i < count($matching[0]); $i++) {
                 $src = "";
                 $pathCounter = substr_count($matching[0][$i], "../");
-                preg_match(Regex::$srcRegex, $matching[0][$i], $imgSrc);
+                preg_match(Regex::$SRC_REGEX, $matching[0][$i], $imgSrc);
 
                 $imgSrc = Url::canonicalImgSrc($imgSrc[2]);
-                if (!preg_match(Regex::$httpRegex, $imgSrc)) {
+                if (!preg_match(Regex::$HTTP_REGEX, $imgSrc)) {
                     $src = Url::getImageUrl($pathCounter, Url::canonicalLink($imgSrc, $url));
                 }
                 if ($src . $imgSrc != $url) {
@@ -175,9 +175,9 @@ class Content
 
     static function separateMetaTagsContent($raw)
     {
-        preg_match(Regex::$contentRegex1, $raw, $match);
+        preg_match(Regex::$CONTEXT_REGEX_1, $raw, $match);
         if (count($match) == 0) {
-            preg_match(Regex::$contentRegex2, $raw, $match);
+            preg_match(Regex::$CONTENT_REGEX_2, $raw, $match);
         }
         return $match[1];
     }

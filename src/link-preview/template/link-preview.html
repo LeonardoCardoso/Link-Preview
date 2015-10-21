@@ -3,7 +3,7 @@
         placeholder="{{placeholder}}">
 </textarea>
 
-<div class="col-md-12 lp-prepost" ng-class="{'lg-display-hide': hidePreview}">
+<div class="col-md-12 lp-prepost" ng-class="{'lg-display-hide': hidePreview == true}">
     <div class="col-sm-3 lp-preview-image">
         <a href="{{preview.url}}" target="_blank">
             <img ng-src="{{preview.image}}">
@@ -32,13 +32,13 @@
 
 <div class="col-md-12 lp-button">
     <span class="col-sm-4 lp-span">
-        <img class="lp-loading-image" ng-src="{{loadingImage}}" ng-class="{'lg-display-hide': hideLoading}"/>
-        <span class="lp-loading-text" ng-class="{'lg-display-hide': hideLoading}">{{loadingText}}</span>
+        <img class="lp-loading-image" src="{{loadingImage}}" ng-class="{'lg-display-hide': hideLoading == true}"/>
+        <span class="lp-loading-text" ng-class="{'lg-display-hide': hideLoading == true}">{{loadingText}}</span>
     </span>
     <span class="col-sm-8 lp-span">
         <button class="pull-right btn"
-                ng-class="{'btn-{{buttonClass}}': allowPost}"
-                ng-class="{'btn-disabled': !allowPost}" type="button">
+                ng-class="{'btn-{{buttonClass}}': allowPost == true}"
+                ng-class="{'btn-disabled': allowPost == false}" type="button">
             {{buttonText}}
         </button>
     </span>

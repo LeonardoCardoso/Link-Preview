@@ -21,7 +21,7 @@ For mode details, visit http://lab.leocardz.com/link-preview/
 - Apache (must support mod_php)
 
 
-## How to added to your project
+## How to add it to your project
 
 <b>1 &bull; Scripts</b>
 

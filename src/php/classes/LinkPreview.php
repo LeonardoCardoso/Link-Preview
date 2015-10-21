@@ -29,7 +29,7 @@ class LinkPreview
             $imgSrc = $matching[$number][$i] . $matching[$number + 1][$i];
             $src = "";
             $pathCounter = substr_count($imgSrc, "../");
-            if (!preg_match(Regex::$httpRegex, $imgSrc)) {
+            if (!preg_match(Regex::$HTTP_REGEX, $imgSrc)) {
                 $src = Url::getImageUrl($pathCounter, Url::canonicalLink($imgSrc, $url));
             }
             if ($src . $imgSrc != $url) {
@@ -45,7 +45,7 @@ class LinkPreview
     function crawl($text, $imageQuantity, $header)
     {
 
-        if (preg_match(Regex::$urlRegex, $text, $match)) {
+        if (preg_match(Regex::$URL_REGEX, $text, $match)) {
 
             $title = "";
             $description = "";
@@ -82,7 +82,7 @@ class LinkPreview
                     $title = $tempTitle;
 
                 if ($title == "") {
-                    if (preg_match(Regex::$titleRegex, str_replace("\n", " ", $raw), $matching))
+                    if (preg_match(Regex::$TITLE_REGEX, str_replace("\n", " ", $raw), $matching))
                         $title = $matching[2];
                 }
 
@@ -96,7 +96,7 @@ class LinkPreview
                 if ($description != "")
                     $descriptionUnderstood = true;
 
-                if (($descriptionUnderstood == false && strlen($title) > strlen($description) && !preg_match(Regex::$urlRegex, $description) && $description != "" && !preg_match('/[A-Z]/', $description)) || $title == $description) {
+                if (($descriptionUnderstood == false && strlen($title) > strlen($description) && !preg_match(Regex::$URL_REGEX, $description) && $description != "" && !preg_match('/[A-Z]/', $description)) || $title == $description) {
                     $title = $description;
                     $description = Content::crawlCode($raw);
                 }
@@ -121,7 +121,7 @@ class LinkPreview
                 $pageUrl = Content::extendedTrim($pageUrl);
                 $description = Content::extendedTrim($description);
 
-                $description = preg_replace(Regex::$scriptRegex, "", $description);
+                $description = preg_replace(Regex::$SCRIPT_REGEX, "", $description);
 
             }
 
