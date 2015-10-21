@@ -48,6 +48,7 @@
             ltext="Carregando"
             tpage="%N de %N"
             btext="Postar"
+            ctext="Cancelar"
             iamount="10"/>
     </div>
     <div class="col-sm-4 demo-col-padding">

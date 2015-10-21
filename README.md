@@ -57,7 +57,9 @@ Attributes
 |     type  	|        type         |       right         |      			right, left, top, bottom // TO-DO  			|
 |    amount		|     imageAmount     |         -1          |    						 any integer   		   	   	    |
 |  	 btext		|       buttonText    |       Post          |    						 any string   		   	   	    |
-| 	 bclass 	|       buttonClass   |       primary       |  default, primary, success, info, warning, danger, link 	|
+|  	 bclass 	|       buttonClass   |       primary       |  default, primary, success, info, warning, danger, link 	|
+| 	 cbtext		|  cancelButtonText   |       Cancel        |    						 any string   		   	   	    |
+| 	 cbclass 	|  cancelButtonClass  |       danger        |  default, primary, success, info, warning, danger, link 	|
 |  	 ltext		|    loadingText      |       Loading       |    						 any string   		   	   	    |
 | 	 limage 	|    loadingImage     |   	 empty.png      |         					any image url 					|
 |  placeholder  |      placeholder    |   an empty string   |    						 any string   		   	   	    |

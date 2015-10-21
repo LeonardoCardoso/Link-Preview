@@ -113,6 +113,8 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
         $scope.imageAmount = angular.isDefined($scope.imageAmount) ? $scope.imageAmount : -1;
         $scope.buttonClass = angular.isDefined($scope.buttonClass) ? $scope.buttonClass : 'primary';
         $scope.buttonText = angular.isDefined($scope.buttonText) ? $scope.buttonText : 'Post';
+        $scope.cancelButtonClass = angular.isDefined($scope.cancelButtonClass) ? $scope.cancelButtonClass : 'danger';
+        $scope.cancelButtonText = angular.isDefined($scope.cancelButtonText) ? $scope.cancelButtonText : 'Cancel';
         $scope.loadingText = angular.isDefined($scope.loadingText) ? $scope.loadingText : 'Loading';
         $scope.loadingImage = angular.isDefined($scope.loadingImage) ? $scope.loadingImage : 'src/link-preview/img/empty.png';
         $scope.thubmnailText = angular.isDefined($scope.thubmnailText) ? $scope.thubmnailText : 'Choose a thumbnail';
@@ -130,6 +132,8 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
             imageAmount: '@iamount',
             buttonClass: '@bclass',
             buttonText: '@btext',
+            cancelButtonClass: '@cbclass',
+            cancelButtonText: '@cbtext',
             loadingText: '@ltext',
             loadingImage: '@limage',
             thubmnailText: '@ttext',
@@ -198,8 +202,11 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
             };
 
             $scope.enablePagination = function ($scope) {
-                $scope.noThumbnail = $scope.preview.image === "";
-                $scope.noImage = $scope.preview.image === "";
+                var hasPreviewImage = $scope.preview.image === "" || $scope.preview.image === null;
+
+                $scope.noThumbnail = hasPreviewImage;
+                $scope.noImage = hasPreviewImage;
+
                 $scope.leftArrowDisabled = $scope.preview.images.length == 1;
                 $scope.rightArrowDisabled = $scope.preview.images.length == 1;
             };
