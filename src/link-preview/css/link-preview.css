@@ -25,7 +25,7 @@
 .lp-prepost {
     margin-top: 10px;
     border: 1px #eee solid;
-    padding: 10px 5px;
+    padding: 5px;
 }
 
 .lp-prepost-wrap {
@@ -81,18 +81,46 @@
     padding-left: 15px;
 }
 
-.lp-preview-title {
+.lp-preview-replace-title {
+    padding-left: 6px;
+    height: 21px;
     font-weight: bold;
-    padding-left: 5px;
+}
+
+.lp-preview-replace-description {
+    padding-left: 6px;
+    height: 21px;
+    font-size: 13px;
+}
+
+.lp-preview-title-wrap {
+    font-weight: bold;
+    padding-left: 0;
+    padding-right: 0;
     font-size: 15px;
     word-break: break-word;
+}
+
+.lp-preview-title-wrap span {
+    padding: 0;
 }
 
 .lp-preview-description {
     font-size: 13px;
     word-break: break-word;
+    padding-right: 0;
     padding-left: 5px;
     margin-top: 5px;
+}
+
+.lp-preview-title {
+    padding-left: 5px !important;
+}
+
+.lp-preview-title-close {
+    padding-left: 8px !important;
+    padding-top: 3px !important;
+    cursor: pointer;
 }
 
 .lp-preview-title:hover, .lp-preview-description:hover {

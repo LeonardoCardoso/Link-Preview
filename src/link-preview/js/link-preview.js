@@ -5,7 +5,7 @@
  *
  * Version: 1.0.0
  */
-app.directive('linkPreview', ['$compile', function ($compile) {
+app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
     var URL_REGEX = /((https?|ftp)\:\/\/)?([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-z0-9-.]*)\.([a-z]{2,3})(\:[0-9]{2,5})?(\/([a-z0-9+\$_\-~@\(\)\%]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/i;
 
@@ -17,36 +17,107 @@ app.directive('linkPreview', ['$compile', function ($compile) {
         return URL_REGEX.test($text);
     };
 
+    var currentImageIndex = 1;
+    var $mainTextArea;
+
     var linker = function (scope, element, attrs) {
 
-        element.bind({
+        $mainTextArea = element.find('textarea')[0];
+        $($mainTextArea).bind({ // Main textarea
             paste: function () {
                 setTimeout(function () {
-                    scope.textCrawling(trim(element.find('textarea')[0].value), scope, element, $compile);
+                    scope.textCrawling(element.find('textarea')[0].value, scope, element, $compile);
                 }, 100);
             },
             keyup: function (e) {
                 if ((e.which === 13 || e.which === 32 || e.which === 17)) {
-                    scope.textCrawling(trim(element.find('textarea')[0].value), scope, element, $compile);
+                    scope.textCrawling(element.find('textarea')[0].value, scope, element, $compile);
+                }
+            }
+        });
+
+        $(element.find('input')[0]).bind({ // Preview title
+            keyup: function (e) {
+                if (e.which === 13) {
+                    scope.previewTitleEditing = false;
+                    $compile(element.contents())(scope);
+                }
+            }
+        });
+
+
+        $(element.find('textarea')[1]).bind({ // Preview description
+            keyup: function (e) {
+                if (e.which === 13) {
+                    scope.previewDescriptionEditing = false;
+                    $compile(element.contents())(scope);
                 }
             }
         });
 
         scope.$watchGroup(
-            ['userTyping', 'hideLoading', 'hidePreview', 'allowPost', 'preview', 'isFetching', 'posts'],
+            ['hideLoading', 'hidePreview', 'allowPosting', 'preview', 'isFetching', 'posts', 'noThumbnail'],
             function (newValues, oldValues, scope) {
-                scope.userTyping = newValues[0];
-                scope.hideLoading = newValues[1];
-                scope.hidePreview = newValues[2];
-                scope.allowPost = newValues[3];
-                scope.preview = newValues[4];
-                scope.isFetching = newValues[5];
-                scope.posts = newValues[6];
+                scope.hideLoading = newValues[0];
+                scope.hidePreview = newValues[1];
+                scope.allowPosting = newValues[2];
+                scope.preview = newValues[3];
+                scope.isFetching = newValues[4];
+                scope.posts = newValues[5];
+                scope.noThumbnail = newValues[6];
 
                 $compile(element.contents())(scope);
             });
 
+    };
 
+    var defaultValues = function ($scope) {
+
+        currentImageIndex = 1;
+
+        if ($mainTextArea !== null && $mainTextArea !== undefined && $mainTextArea.value !== undefined) {
+            $mainTextArea.value = "";
+        }
+
+        $scope.preview = {
+            "title": "",
+            "url": "",
+            "pageUrl": "",
+            "canonicalUrl": "",
+            "description": "",
+            "image": "",
+            "images": [],
+            "video": "",
+            "videoIframe": ""
+        };
+
+        $scope.hidePreview = true;
+
+        $scope.hideLoading = true;
+
+        $scope.isFetching = false;
+
+        $scope.allowPosting = false;
+
+        $scope.rightArrowDisabled = true;
+
+        $scope.leftArrowDisabled = true;
+
+        $scope.noThumbnail = false;
+
+        $scope.previewTitleEditing = false;
+
+        $scope.previewDescriptionEditing = false;
+
+        $scope.type = angular.isDefined($scope.type) ? $scope.type : 'right';
+        $scope.imageAmount = angular.isDefined($scope.imageAmount) ? $scope.imageAmount : -1;
+        $scope.buttonClass = angular.isDefined($scope.buttonClass) ? $scope.buttonClass : 'primary';
+        $scope.buttonText = angular.isDefined($scope.buttonText) ? $scope.buttonText : 'Post';
+        $scope.loadingText = angular.isDefined($scope.loadingText) ? $scope.loadingText : 'Loading';
+        $scope.loadingImage = angular.isDefined($scope.loadingImage) ? $scope.loadingImage : 'src/link-preview/img/empty.png';
+        $scope.thubmnailText = angular.isDefined($scope.thubmnailText) ? $scope.thubmnailText : 'Choose a thumbnail';
+        $scope.noThubmnailText = angular.isDefined($scope.noThubmnailText) ? $scope.noThubmnailText : 'No thumbnail';
+        $scope.thumbnailPagination = angular.isDefined($scope.thumbnailPagination) ? $scope.thumbnailPagination : '%N of %N';
     };
 
     return {
@@ -61,50 +132,78 @@ app.directive('linkPreview', ['$compile', function ($compile) {
             loadingImage: '@limage',
             thubmnailText: '@ttext',
             noThubmnailText: '@nttext',
-            thumbnailPagination: '@tpage',
-            userTyping: '='
+            thumbnailPagination: '@tpage'
         },
         link: linker,
         controller: function ($scope) {
-            $scope.preview = {
-                "title": "",
-                "url": "",
-                "pageUrl": "",
-                "canonicalUrl": "",
-                "description": "",
-                "images": "",
-                "video": "",
-                "videoIframe": ""
-            };
 
-            $scope.hidePreview = true;
-
-            $scope.hideLoading = true;
-
-            $scope.isFetching = false;
-
-            $scope.allowPost = false;
-
-            $scope.type = angular.isDefined($scope.type) ? $scope.type : 'right';
-            $scope.imageAmount = angular.isDefined($scope.imageAmount) ? $scope.imageAmount : -1;
-            $scope.buttonClass = angular.isDefined($scope.buttonClass) ? $scope.buttonClass : 'primary';
-            $scope.buttonText = angular.isDefined($scope.buttonText) ? $scope.buttonText : 'Post';
-            $scope.loadingText = angular.isDefined($scope.loadingText) ? $scope.loadingText : 'Loading';
-            $scope.loadingImage = angular.isDefined($scope.loadingImage) ? $scope.loadingImage : 'src/link-preview/img/empty.png';
-            $scope.thubmnailText = angular.isDefined($scope.thubmnailText) ? $scope.thubmnailText : 'Choose a thumbnail';
-            $scope.noThubmnailText = angular.isDefined($scope.noThubmnailText) ? $scope.noThubmnailText : 'No thumbnail';
-            $scope.thumbnailPagination = angular.isDefined($scope.thumbnailPagination) ? $scope.thumbnailPagination : '%N of %N';
+            defaultValues($scope);
 
             $scope.textCrawling = function ($text, scope, element, $compile) {
-                if (!$scope.isFetching) {
-                    console.log($text, hasUrl($text));
+                if (!$scope.isFetching && $text !== "") {
                     if (hasUrl($text)) {
                         $scope.hidePreview = true;
                         $scope.hideLoading = false;
                         $scope.isFetching = true;
+                        $scope.allowPosting = false;
+
+                        var url = 'src/link-preview/php/textCrawler.php';
+                        var jsonData = angular.toJson({
+                            text: $text,
+                            imageAmount: $scope.imageAmount
+                        });
+
+                        $http({
+                            url: url,
+                            method: "POST",
+                            data: "data=" + jsonData,
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        }).success(function (data, status, headers, config) {
+                            console.log(data);
+                            $scope.preview = data;
+
+                            $scope.hidePreview = false;
+
+                            $scope.hideLoading = true;
+
+                            $scope.isFetching = false;
+
+                            $scope.allowPosting = true;
+
+                            $scope.enablePagination($scope);
+
+                            $scope.updatePagination($scope, currentImageIndex);
+
+                            $compile(element.contents())(scope);
+                        });
+
                     }
                 }
                 $compile(element.contents())(scope);
+            };
+
+            $scope.enablePagination = function ($scope) {
+                $scope.leftArrowDisabled = $scope.preview.images.length == 1;
+                $scope.rightArrowDisabled = $scope.preview.images.length == 1;
+            };
+
+            $scope.updatePagination = function ($scope, current) {
+                var pagination = $scope.thumbnailPagination;
+                pagination = pagination.replace("%N", current);
+                pagination = pagination.replace("%N", $scope.preview.images.length);
+                $scope.thumbnailPagination = pagination;
+            };
+
+            $scope.editPreviewTitle = function () {
+                $scope.previewTitleEditing = true;
+            };
+
+            $scope.editPreviewDescription = function () {
+                $scope.previewDescriptionEditing = true;
+            };
+
+            $scope.resetPreview = function () {
+                defaultValues($scope);
             };
 
         },

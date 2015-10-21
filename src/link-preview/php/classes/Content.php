@@ -84,21 +84,21 @@ class Content
 
         $maxImages = $imageQuantity != -1 && $imageQuantity < count($content) ? $imageQuantity : count($content);
 
-        $images = "";
+        $images = array();
         for ($i = 0; $i < count($content); $i++) {
             if (!($size = @getimagesize($content[$i]))) {
                 continue;
             }
             $size = getimagesize($content[$i]);
             if ($size[0] > 40 && $size[1] > 15) {// avoids getting very small images
-                $images .= $content[$i] . "|";
+                array_push($images, $content[$i]);
                 $maxImages--;
                 if ($maxImages == 0)
                     break;
             }
         }
 
-        return substr($images, 0, -1);
+        return $images;
     }
 
     static function getMetaTags($contents)

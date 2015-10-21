@@ -10,13 +10,15 @@ include_once "classes/LinkPreview.php";
 
 SetUp::init();
 
-$text = $_POST["text"];
-$imageQuantity = $_POST["imagequantity"];
+$data = json_decode($_POST["data"]);
+
+$text = $data->text;
+$imageAmount = $data->imageAmount;
 $text = " " . str_replace("\n", " ", $text);
 $header = "";
 
 $linkPreview = new LinkPreview();
-$answer = $linkPreview->crawl($text, $imageQuantity, $header);
+$answer = $linkPreview->crawl($text, $imageAmount, $header);
 
 echo $answer;
 

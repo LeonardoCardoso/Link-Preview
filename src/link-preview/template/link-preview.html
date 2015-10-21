@@ -1,60 +1,137 @@
 <textarea
-        class="col-md-12 form-control lp-no-resize link-preview-{{type}}"
+        class="col-md-12 form-control lp-no-resize"
         placeholder="{{placeholder}}">
 </textarea>
 
 <div class="col-md-12 lp-prepost" ng-class="{'lg-display-hide': hidePreview == true}">
-    <div class="col-sm-3 lp-preview-image">
+
+    <div class="col-sm-3 lp-preview-image" ng-class="{'lg-display-hide': noThumbnail == true}">
+
         <a href="{{preview.url}}" target="_blank">
+
             <img ng-src="{{preview.image}}">
+
         </a>
+
     </div>
-    <div class="col-sm-9 lp-prepost-wrap">
-        <div class="col-sm-12 lp-preview-title">{{preview.title}}</div>
-        <div class="col-sm-12 lp-preview-cannonical-url">{{preview.url}}</div>
-        <div class="col-sm-12 lp-preview-description">{{preview.description}}</div>
-        <div class="col-sm-12 lp-preview-thubmnail">
+
+    <div class="lp-prepost-wrap" ng-class="{'col-sm-12': noThumbnail == true, 'col-sm-9': noThumbnail == false}">
+
+        <div class="col-sm-12 lp-preview-title-wrap"
+             ng-class="{'lg-display-hide': previewTitleEditing == true}">
+            <span class="lp-preview-title col-md-11" ng-click="editPreviewTitle()">{{preview.title}}</span>
+            <span class="lp-preview-title-close col-md-1" ng-click="resetPreview()"><i class="fa fa-close"></i></span>
+        </div>
+
+        <input class="form-control col-sm-12 lp-preview-replace-title"
+               id="editPreviewTitle"
+               ng-class="{'lg-display-hide': previewTitleEditing == false}"
+               ng-model="preview.title" type="text"
+               placeholder="{{preview.title}}">
+
+        <div class="col-sm-12 lp-preview-cannonical-url">{{preview.canonicalUrl}}</div>
+
+        <div class="col-sm-12 lp-preview-description"
+             ng-click="editPreviewDescription()"
+             ng-class="{'lg-display-hide': previewDescriptionEditing == true}">
+            {{preview.description}}
+        </div>
+
+        <textarea
+                class="col-md-12 form-control lp-no-resize lp-preview-replace-description"
+                ng-class="{'lg-display-hide': previewDescriptionEditing == false}"
+                ng-model="preview.description">
+        </textarea>
+
+        <div class="col-sm-12 lp-preview-thubmnail" ng-class="{'lg-display-hide': noThumbnail == true}">
+
             <span class="lp-preview-thubmnail-buttons">
-                <button class="btn btn-default btn-sm" type="button"><i class="fa fa-arrow-left"></i></button>
-                <button class="btn btn-default btn-sm" type="button"><i class="fa fa-arrow-right"></i></button>
+
+                <button class="btn btn-sm"
+                        ng-class="{'btn-disabled': leftArrowDisabled == true, 'btn-default': leftArrowDisabled == false}"
+                        type="button">
+
+                    <i class="fa fa-arrow-left"></i>
+
+                </button>
+
+                <button class="btn btn-sm"
+                        ng-class="{'btn-disabled': rightArrowDisabled == true, 'btn-default': rightArrowDisabled == false}"
+                        type="button">
+
+                    <i class="fa fa-arrow-right"></i>
+
+                </button>
+
             </span>
+
             <span class="lp-preview-thubmnail-pagination">{{thumbnailPagination}}</span>
+
             <span class="lp-preview-thubmnail-text">{{thubmnailText}}</span>
+
         </div>
+
         <div class="col-sm-12 lp-preview-no-thubmnail">
+
             <label class="checkbox-inline lp-preview-no-thubmnail-text">
-                <input type="checkbox" value="">
+
+                <input type="checkbox" ng-model="noThumbnail">
+
                 <span>{{noThubmnailText}}</span>
+
             </label>
+
         </div>
+
     </div>
+
 </div>
 
 <div class="col-md-12 lp-button">
+
     <span class="col-sm-4 lp-span">
+
         <img class="lp-loading-image" src="{{loadingImage}}" ng-class="{'lg-display-hide': hideLoading == true}"/>
+
         <span class="lp-loading-text" ng-class="{'lg-display-hide': hideLoading == true}">{{loadingText}}</span>
+
     </span>
+
     <span class="col-sm-8 lp-span">
+
         <button class="pull-right btn"
-                ng-class="{'btn-{{buttonClass}}': allowPost == true}"
-                ng-class="{'btn-disabled': allowPost == false}" type="button">
+                ng-class="{'btn-{{buttonClass}}': allowPosting == true, 'btn-disabled': allowPosting == false}"
+                type="button">
             {{buttonText}}
         </button>
+
     </span>
+
 </div>
 
 <div class="lp-outer-posted" ng-repeat="post in posts">
+
     <a href="{{post.url}}" target="_blank">
+
         <div class="col-md-12 lp-posted">
+
             <div class="col-sm-3 lp-posted-image">
+
                 <img ng-src="{{post.image}}">
+
             </div>
+
             <div class="col-sm-9 lp-posted-wrap">
                 <div class="col-sm-12 lp-posted-title">{{post.title}}</div>
+
                 <div class="col-sm-12 lp-posted-cannonical-url">{{post.url}}</div>
+
                 <div class="col-sm-12 lp-posted-description">{{post.description}}</div>
             </div>
+
+            delete
         </div>
+
     </a>
+
 </div>

@@ -8,10 +8,11 @@
  */
 
 /** This class handles url analysis */
+class Url
+{
 
-class Url {
-
-    static function canonicalLink($imgSrc, $referrer) {
+    static function canonicalLink($imgSrc, $referrer)
+    {
         if (strpos($imgSrc, "//") === 0)
             $imgSrc = "http:" . $imgSrc;
         else if (strpos($imgSrc, "/") === 0)
@@ -21,14 +22,16 @@ class Url {
         return $imgSrc;
     }
 
-    static function canonicalImgSrc($imgSrc) {
+    static function canonicalImgSrc($imgSrc)
+    {
         $imgSrc = str_replace("../", "", $imgSrc);
         $imgSrc = str_replace("./", "", $imgSrc);
         $imgSrc = str_replace(" ", "%20", $imgSrc);
         return $imgSrc;
     }
 
-    static function canonicalRefererPage($url) {
+    static function canonicalRefererPage($url)
+    {
         $canonical = "";
         $barCounter = 0;
         for ($i = 0; $i < strlen($url); $i++) {
@@ -45,15 +48,16 @@ class Url {
         return $canonical;
     }
 
-    static function canonicalPage($url) {
+    static function canonicalPage($url)
+    {
         $canonical = "";
 
         if (substr_count($url, 'http://') > 1 || substr_count($url, 'https://') > 1 || (strpos($url, 'http://') !== false && strpos($url, 'https://') !== false))
             return $url;
 
-        if (strpos($url, "http://") !== false)
+        if (strpos($url, "http://") !== false || strpos($url, "HTTP://") !== false)
             $url = substr($url, 7);
-        else if (strpos($url, "https://") !== false)
+        else if (strpos($url, "https://") !== false || strpos($url, "HTTPS://") !== false)
             $url = substr($url, 8);
 
         for ($i = 0; $i < strlen($url); $i++) {
@@ -66,7 +70,8 @@ class Url {
         return $canonical;
     }
 
-    static function getImageUrl($pathCounter, $url) {
+    static function getImageUrl($pathCounter, $url)
+    {
         $src = "";
         if ($pathCounter > 0) {
             $urlBreaker = explode('/', $url);

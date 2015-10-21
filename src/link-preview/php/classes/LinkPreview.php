@@ -56,7 +56,7 @@ class LinkPreview
                 $match[0] = "http://" . substr($match[0], 1);
 
             $finalUrl = $match[0];
-            $pageUrl = str_replace("https://", "http://", $finalUrl);
+            $pageUrl = $finalUrl;
 
             if (Content::isImage($pageUrl)) {
                 $images = $pageUrl;
@@ -101,21 +101,23 @@ class LinkPreview
                     $description = Content::crawlCode($raw);
                 }
 
-                if(Content::isJson($title)){
+                if (Content::isJson($title)) {
                     $title = "";
                 }
-                if(Content::isJson($description)){
+                if (Content::isJson($description)) {
                     $description = "";
                 }
 
                 $media = $this->getMedia($pageUrl);
-                $images = count($media) == 0 ? Content::extendedTrim($metaTags["image"]) : $media[0];
+                $images = count($media) == 0 ? array(Content::extendedTrim($metaTags["image"])) : array($media[0]);
                 $videoIframe = $media[1];
 
-                if ($images == "")
+                if (count($images) == 0) {
                     $images = Content::getImages($raw, $pageUrl, $imageQuantity);
-                if ($media != null && $media[0] != "" && $media[1] != "")
+                }
+                if ($media != null && $media[0] != "" && $media[1] != "") {
                     $video = "yes";
+                }
 
                 $title = Content::extendedTrim($title);
                 $pageUrl = Content::extendedTrim($pageUrl);
@@ -130,8 +132,16 @@ class LinkPreview
 
             $description = strip_tags($description);
 
-            $answer = array("title" => $title, "url" => $finalLink, "pageUrl" => $finalUrl, "canonicalUrl" => Url::canonicalPage($pageUrl), "description" => $description,
-                "images" => $images, "video" => $video, "videoIframe" => $videoIframe);
+            $answer = array(
+                "title" => $title,
+                "url" => $finalLink,
+                "pageUrl" => $finalUrl,
+                "canonicalUrl" => Url::canonicalPage($pageUrl),
+                "description" => $description,
+                "image" => $images[0],
+                "images" => $images,
+                "video" => $video,
+                "videoIframe" => $videoIframe);
 
             $result_json = Json::jsonSafe($answer, $header);
             $result_json_decoded = json_decode($result_json);
@@ -149,8 +159,16 @@ class LinkPreview
             }
 
             if ($flagged) {
-                $answer = array("title" => $title, "url" => $finalLink, "pageUrl" => $finalUrl, "canonicalUrl" => Url::canonicalPage($pageUrl), "description" => $description,
-                    "images" => $images, "video" => $video, "videoIframe" => $videoIframe);
+                $answer = array(
+                    "title" => $title,
+                    "url" => $finalLink,
+                    "pageUrl" => $finalUrl,
+                    "canonicalUrl" => Url::canonicalPage($pageUrl),
+                    "description" => $description,
+                    "image" => $images[0],
+                    "images" => $images,
+                    "video" => $video,
+                    "videoIframe" => $videoIframe);
 
                 return Json::jsonSafe($answer, $header);
             } else {
