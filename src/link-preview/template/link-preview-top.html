@@ -45,6 +45,8 @@
 
             <img ng-src="{{preview.image}}">
 
+            <span><i class="fa fa-play lp-play" ng-class="{'lg-display-hide': preview.video == false}"></i></span>
+
         </div>
 
         <div class="clearfix col-sm-12 lp-preview-thubmnail lp-top"
@@ -142,13 +144,20 @@
                 <div class="col-sm-12 lp-posted-description lp-top" ng-bind-html="post.description"></div>
             </div>
 
-            <div class="col-sm-12 lp-posted-image lp-top" ng-class="{'lg-display-hide': post.image == ''}">
-
-                <img ng-src="{{post.image}}">
-
-            </div>
-
         </a>
+
+        <div class="col-sm-12 lp-posted-image lp-top" ng-click="imageAction(post)"
+             ng-class="{'lg-display-hide': post.image == ''}">
+
+            <img ng-src="{{post.image}}" ng-class="{'lg-display-hide': showIframe == true}">
+
+            <span><i class="fa fa-play lp-play"
+                     ng-class="{'lg-display-hide': post.video == false, 'lg-display-hide': showIframe == true}"></i></span>
+
+            <span ng-bind-html="post.videoIframe" class="embed-responsive embed-responsive-16by9"
+                  ng-class="{'lg-display-hide': showIframe == false}"></span>
+
+        </div>
 
         <span class="col-sm-12 lp-span">
 

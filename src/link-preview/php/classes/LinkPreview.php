@@ -50,7 +50,7 @@ class LinkPreview
             $title = "";
             $description = "";
             $videoIframe = "";
-            $video = "no";
+            $video = false;
 
             if (strpos($match[0], " ") === 0)
                 $match[0] = "http://" . substr($match[0], 1);
@@ -116,7 +116,7 @@ class LinkPreview
                     $images = Content::getImages($raw, $pageUrl, $imageQuantity);
                 }
                 if ($media != null && $media[0] != "" && $media[1] != "") {
-                    $video = "yes";
+                    $video = true;
                 }
 
                 $title = Content::extendedTrim($title);

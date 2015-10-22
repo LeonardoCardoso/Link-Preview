@@ -120,7 +120,7 @@ Make sure your columns are the same as those ones in [linkpreview.sql](https://g
 	   "description":"description",
 	   "images": ["array of images"],
 	   "image": "first image of images",
-	   "video":"yes|no",
+	   "video":"true|false",
 	   "videoIframe":"video iframe, if it is a video"
 	}
 ```

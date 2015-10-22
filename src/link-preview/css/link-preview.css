@@ -24,6 +24,15 @@
     font-size: 12px;
 }
 
+.lp-play {
+    color: white;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.55);
+    border: white 1px solid;
+    padding: 5px 14px;
+    margin: -35px 5px 5px 6px;
+}
+
 /** Preview */
 
 .lp-prepost {
@@ -207,6 +216,7 @@
 
 .lp-posted-image {
     padding: 0px;
+    cursor: pointer !important;
 }
 
 .lp-posted-image img {

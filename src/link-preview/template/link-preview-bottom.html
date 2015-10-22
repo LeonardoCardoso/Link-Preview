@@ -10,6 +10,8 @@
 
         <img ng-src="{{preview.image}}">
 
+        <span><i class="fa fa-play lp-play" ng-class="{'lg-display-hide': preview.video == false}"></i></span>
+
     </div>
 
     <div class="lp-prepost-wrap lp-bottom col-sm-12">
@@ -133,13 +135,20 @@
 
         <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="post.text"></span>
 
+        <div class="col-sm-12 lp-posted-image lp-bottom" ng-click="imageAction(post)"
+             ng-class="{'lg-display-hide': post.image == ''}">
+
+            <img ng-src="{{post.image}}" ng-class="{'lg-display-hide': showIframe == true}">
+
+            <span><i class="fa fa-play lp-play"
+                     ng-class="{'lg-display-hide': post.video == false, 'lg-display-hide': showIframe == true}"></i></span>
+
+            <span ng-bind-html="post.videoIframe" class="embed-responsive embed-responsive-16by9"
+                  ng-class="{'lg-display-hide': showIframe == false}"></span>
+
+        </div>
+
         <a href="{{post.pageUrl}}" target="_blank">
-
-            <div class="col-sm-12 lp-posted-image lp-bottom" ng-class="{'lg-display-hide': post.image == ''}">
-
-                <img ng-src="{{post.image}}">
-
-            </div>
 
             <div class="lp-posted-wrap col-sm-12">
                 <div class="col-sm-12 lp-posted-title lp-bottom">{{post.title}}</div>
