@@ -37,7 +37,6 @@
 
     <div class="col-sm-4 demo-col-padding">
         <link-preview
-            ltext="Carregando"
             tpage="%N ➜ %N"
             btext="Post This Preview"
             type="left"

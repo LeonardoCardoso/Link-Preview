@@ -159,7 +159,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                         $http({
                             url: url,
                             method: "POST",
-                            data: "data=" + window.btoa(jsonData),
+                            data: "data=" + window.btoa(encodeURIComponent(jsonData)),
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         }).success(function (data, status, headers, config) {
 
@@ -254,7 +254,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                     $http({
                         url: url,
                         method: "POST",
-                        data: "data=" + window.btoa(jsonData),
+                        data: "data=" + window.btoa(encodeURIComponent(jsonData)),
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                     }).success(function (data, status, headers, config) {
 

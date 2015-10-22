@@ -38,7 +38,7 @@
                 ng-model="preview.description">
         </textarea>
 
-        <div class="col-sm-12 lp-preview-thubmnail" ng-class="{'lg-display-hide': noThumbnail == true}">
+        <div class="clearfix col-sm-12 lp-preview-thubmnail" ng-class="{'lg-display-hide': noThumbnail == true}">
 
 
 
@@ -85,20 +85,18 @@
 
     </div>
 
-    <div class="col-sm-3 lp-preview-image" ng-class="{'lg-display-hide': noThumbnail == true}">
+    <div class="col-sm-3 lp-preview-image lp-left" ng-class="{'lg-display-hide': noThumbnail == true}">
 
-        <a href="{{preview.url}}" target="_blank">
 
-            <img ng-src="{{preview.image}}">
+        <img ng-src="{{preview.image}}">
 
-        </a>
 
     </div>
 
 
 </div>
 
-<div class="col-md-12 lp-button">
+<div class="clearfix col-md-12 lp-button">
 
     <span class="col-sm-4 lp-span">
 
@@ -132,7 +130,7 @@
 <div class="lp-outer-posted" ng-repeat="post in posts">
 
 
-    <div class="clearfix col-md-12 lp-posted">
+    <div class="clearfix col-md-12 lp-posted lp-left">
 
         <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="post.text"></span>
 
@@ -140,14 +138,14 @@
 
             <div class="lp-posted-wrap"
                  ng-class="{'col-sm-12': post.image == '', 'col-sm-9': post.image != ''}">
-                <div class="col-sm-12 lp-posted-title">{{post.title}}</div>
+                <div class="col-sm-12 lp-posted-title lp-left">{{post.title}}</div>
 
-                <div class="col-sm-12 lp-posted-canonical-url">{{post.canonicalUrl}}</div>
+                <div class="col-sm-12 lp-posted-canonical-url lp-left">{{post.canonicalUrl}}</div>
 
-                <div class="col-sm-12 lp-posted-description" ng-bind-html="post.description"></div>
+                <div class="col-sm-12 lp-posted-description lp-left" ng-bind-html="post.description"></div>
             </div>
 
-            <div class="col-sm-3 lp-posted-image" ng-class="{'lg-display-hide': post.image == ''}">
+            <div class="col-sm-3 lp-posted-image lp-left" ng-class="{'lg-display-hide': post.image == ''}">
 
                 <img ng-src="{{post.image}}">
 
@@ -157,7 +155,7 @@
 
         <span class="col-sm-12 lp-span">
 
-            <span class="pull-right lp-posted-close" ng-click="deletePosted(post, $index)">
+            <span class="pull-left lp-posted-close" ng-click="deletePosted(post, $index)">
                 <i class="fa fa-close"></i>
             </span>
 

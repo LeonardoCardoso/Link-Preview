@@ -8,11 +8,7 @@
 
     <div class="col-sm-3 lp-preview-image" ng-class="{'lg-display-hide': noThumbnail == true}">
 
-        <a href="{{preview.url}}" target="_blank">
-
-            <img ng-src="{{preview.image}}">
-
-        </a>
+        <img ng-src="{{preview.image}}">
 
     </div>
 
@@ -47,7 +43,7 @@
                 ng-model="preview.description">
         </textarea>
 
-        <div class="col-sm-12 lp-preview-thubmnail" ng-class="{'lg-display-hide': noThumbnail == true}">
+        <div class="clearfix col-sm-12 lp-preview-thubmnail" ng-class="{'lg-display-hide': noThumbnail == true}">
 
             <span class="lp-preview-thubmnail-buttons">
 
@@ -94,7 +90,7 @@
 
 </div>
 
-<div class="col-md-12 lp-button">
+<div class="clearfix col-md-12 lp-button">
 
     <span class="col-sm-4 lp-span">
 
