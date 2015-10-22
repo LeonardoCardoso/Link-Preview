@@ -9,7 +9,7 @@
 
 /** This class is for database connection. It's just an example, neither security is being handled here nor mysql errors that might be occurred. */
 
-include_once "HighLight.php";
+include_once "Highlight.php";
 
 class Database
 {
@@ -80,8 +80,8 @@ class Database
         $rows = array();
         while ($r = mysql_fetch_assoc($sth)) {
 
-            $r["text"] = HighLight::url($r["text"]);
-            $r["description"] = HighLight::url($r["description"]);
+            $r["text"] = Highlight::url($r["text"]);
+            $r["description"] = Highlight::url($r["description"]);
 
             array_push($rows, $r);
         }

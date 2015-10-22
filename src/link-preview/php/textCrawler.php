@@ -14,7 +14,7 @@ $data = json_decode($_POST["data"]);
 
 $text = $data->text;
 $imageAmount = $data->imageAmount;
-$text = " " . str_replace("\n", " ", $text);
+$text = str_replace("\n", " ", $text);
 $header = "";
 
 $linkPreview = new LinkPreview();

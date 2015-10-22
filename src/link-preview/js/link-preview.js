@@ -5,7 +5,7 @@
  *
  * Version: 1.0.0
  */
-app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
+app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $http, $sce) {
 
     var URL_REGEX = /((https?|ftp)\:\/\/)?([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-z0-9-.]*)\.([a-z]{2,3})(\:[0-9]{2,5})?(\/([a-z0-9+\$_\-~@\(\)\%]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/i;
 
@@ -17,13 +17,9 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
         return URL_REGEX.test($text);
     };
 
-    var currentImageIndex = 1;
-    var $mainTextArea;
-
     var linker = function (scope, element, attrs) {
 
-        $mainTextArea = element.find('textarea')[0];
-        $($mainTextArea).bind({ // Main textarea
+        $(element.find('textarea')[0]).bind({ // Main textarea
             paste: function () {
                 setTimeout(function () {
                     scope.textCrawling(element.find('textarea')[0].value, scope, element, $compile);
@@ -71,13 +67,10 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
     var defaultValues = function ($scope) {
 
-        currentImageIndex = 1;
-
-        if ($mainTextArea !== null && $mainTextArea !== undefined && $mainTextArea.value !== undefined) {
-            $mainTextArea.value = "";
-        }
+        $scope.currentImageIndex = 1;
 
         $scope.preview = {
+            text: "",
             "title": "",
             "url": "",
             "pageUrl": "",
@@ -145,6 +138,8 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
         link: linker,
         controller: function ($scope) {
 
+            $scope.posts = [];
+
             defaultValues($scope);
 
             $scope.textCrawling = function ($text, scope, element, $compile) {
@@ -167,7 +162,7 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
                             data: "data=" + jsonData,
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         }).success(function (data, status, headers, config) {
-                            console.log(data);
+
                             $scope.preview = data;
 
                             $scope.hasEmptyInfo($scope);
@@ -176,20 +171,15 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
                             $scope.hideLoading = true;
 
-                            $scope.isFetching = false;
-
                             $scope.allowPosting = true;
 
                             $scope.enablePagination($scope);
 
-                            $scope.updatePagination($scope, currentImageIndex);
-
-                            // $compile(element.contents())(scope);
+                            $scope.updatePagination($scope);
                         });
 
                     }
                 }
-                // $compile(element.contents())(scope);
             };
 
             $scope.hasEmptyInfo = function ($scope) {
@@ -211,28 +201,27 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
                 $scope.rightArrowDisabled = $scope.preview.images.length == 1;
             };
 
-            $scope.updatePagination = function ($scope, current) {
+            $scope.updatePagination = function ($scope) {
                 var pagination = $scope.thumbnailPagination;
-                pagination = pagination.replace("%N", current);
+                pagination = pagination.replace("%N", $scope.currentImageIndex);
                 pagination = pagination.replace("%N", $scope.preview.images.length);
                 $scope.thumbnailPaginationText = pagination;
 
-                $scope.leftArrowDisabled = current == 1;
-                $scope.rightArrowDisabled = current == $scope.preview.images.length;
+                $scope.leftArrowDisabled = $scope.currentImageIndex == 1;
+                $scope.rightArrowDisabled = $scope.currentImageIndex == $scope.preview.images.length;
             };
 
             $scope.previousImage = function () {
-                if (currentImageIndex != 1) {
-                    currentImageIndex--;
-                    $scope.setNewPreviewImage(currentImageIndex);
+                if ($scope.currentImageIndex != 1) {
+                    $scope.currentImageIndex--;
+                    $scope.setNewPreviewImage($scope.currentImageIndex);
                 }
             };
 
             $scope.nextImage = function () {
-                if (currentImageIndex != $scope.preview.images.length) {
-                    currentImageIndex++;
-                    console.log(currentImageIndex);
-                    $scope.setNewPreviewImage(currentImageIndex);
+                if ($scope.currentImageIndex != $scope.preview.images.length) {
+                    $scope.currentImageIndex++;
+                    $scope.setNewPreviewImage($scope.currentImageIndex);
                 }
             };
 
@@ -251,6 +240,38 @@ app.directive('linkPreview', ['$compile', '$http', function ($compile, $http) {
 
             $scope.resetPreview = function () {
                 defaultValues($scope);
+            };
+
+            $scope.post = function (preview) {
+                if ($scope.allowPosting) {
+
+                    var url = 'src/link-preview/php/highlightUrls.php';
+                    var jsonData = angular.toJson({
+                        text: $scope.userTyping,
+                        description: $scope.preview.description
+                    });
+
+                    $http({
+                        url: url,
+                        method: "POST",
+                        data: "data=" + jsonData,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    }).success(function (data, status, headers, config) {
+
+                        if ($scope.noThumbnail || $scope.noImage) {
+                            $scope.preview.image = "";
+                        }
+                        $scope.preview.text = $sce.trustAsHtml(data.text);
+                        $scope.preview.description = $sce.trustAsHtml(data.description);
+                        $scope.userTyping = "";
+                        $scope.posts.unshift(preview);
+                        defaultValues($scope);
+                    });
+                }
+            };
+
+            $scope.deletePosted = function (post, $index) {
+                $scope.posts.splice($index, 1);
             };
 
         },

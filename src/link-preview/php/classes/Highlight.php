@@ -14,16 +14,18 @@
 
 include_once "Regex.php";
 
-class HighLight {
+class Highlight
+{
 
-    static function url($text){
-        $text = " " . str_replace("\n", " ", $text);
+    static function url($text)
+    {
+        $text = str_replace("\n", " ", $text);
         if (preg_match_all(Regex::$URL_REGEX, $text, $matches)) {
             for ($i = 0; $i < count($matches[0]); $i++) {
                 $currentUrl = $matches[0][$i];
                 if ($currentUrl[0] == " ")
                     $currentUrl = "http://" . substr($currentUrl, 1);
-                $text = str_replace($matches[0][$i], "<a href='" . $currentUrl . "' target='_blank'>" . $matches[0][$i] . "</a>", $text);
+                $text = str_replace($matches[0][$i], "<a class='lp-post-link' href='" . $currentUrl . "' target='_blank'>" . $matches[0][$i] . "</a>", $text);
             }
         }
         return $text;

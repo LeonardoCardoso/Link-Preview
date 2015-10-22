@@ -12,6 +12,13 @@ Once the source code of the url is obtained, regular expressions begin to seek o
 
 For mode details, visit http://lab.leocardz.com/link-preview/
 
+Simple												  						| Gallery
+:--------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
+![Preview](/demo/img/preview.gif?raw=true "Preview")  						| ![Preview Gallery](/demo/img/preview_gallery.gif?raw=true "Preview Gallery") 
+<b>Video</b>										  						| 
+![Preview Video](/demo/img/preview_video.gif?raw=true "Preview Video") 	| 
+
+
 =======
 
 ## HTTP Server
@@ -103,7 +110,7 @@ Make sure your columns are the same as those ones in [linkpreview.sql](https://g
 	   "title":"title",
 	   "url":"original url",
 	   "pageUrl":"page url",
-	   "canonicalUrl":"cannonical url",
+	   "canonicalUrl":"canonical url",
 	   "description":"description",
 	   "images": "array of images",
 	   "image": "first image of images",
@@ -128,16 +135,6 @@ $ sudo apachectl restart
 
 Also where there is 'src/link-preview/' as part of a path of a <b>Javascript, CSS or image</b> file, 
 you must change to the path on your server.
-
-
-Examples
-=================================
-
-![Preview](/demo/img/preview.gif?raw=true "Preview")
-
-![Preview Gallery](/demo/img/preview_gallery.gif?raw=true "Preview Gallery")
-
-![Preview Video](/demo/img/preview_video.gif?raw=true "Preview Video")
 
 
 Contact

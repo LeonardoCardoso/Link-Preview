@@ -12,14 +12,15 @@
  * So, it has nothing bound directly to LinkPreview class
  */
 include_once "classes/SetUp.php";
-include_once "classes/HighLight.php";
+include_once "classes/Highlight.php";
 
 SetUp::init();
 
-error_reporting(false);
-$text = $_GET["text"];
-$description = $_GET["description"];
+$data = json_decode($_POST["data"]);
 
-$answer = array("urls" => HighLight::url($text), "description" => HighLight::url($description));
+$text = $data->text;
+$description = $data->description;
+
+$answer = array("text" => Highlight::url($text), "description" => Highlight::url($description));
 
 echo json_encode($answer);
