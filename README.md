@@ -12,12 +12,15 @@ Once the source code of the url is obtained, regular expressions begin to seek o
 
 For mode details, visit http://lab.leocardz.com/link-preview/
 
-<b>Simple</b>												  				| <b>Gallery<b>
-![Preview](/demo/img/preview.gif?raw=true "Preview")  						| ![Preview Gallery](/demo/img/preview_gallery.gif?raw=true "Preview Gallery") 
-<b>Video</b>										  						| <b>Left</b>
-![Preview Video](/demo/img/preview_video.gif?raw=true "Preview Video") 		| ![Left](/demo/img/left.png?raw=true "Left")
-<b>Bottom</b>										  						| <b>Top</b>
-![Bottom](/demo/img/bottom.png?raw=true "Bottom") 							| ![Top](/demo/img/top.png?raw=true "Top")
+|						     									      		|		    	  													            | 
+:--------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|	
+|						     									      		|		    	  													            | 
+<b>Right</b>									  							| <b>Left</b>																	|
+![Preview](/demo/img/preview.gif?raw=true "Preview")  						| ![Left](/demo/img/left.png?raw=true "Left")									|
+<b>Bottom</b>										  						| <b>Top</b>																	|
+![Bottom](/demo/img/bottom.png?raw=true "Bottom") 							| ![Top](/demo/img/top.png?raw=true "Top")										|
+<b>Gallery<b> 											  					| <b>Video</b>																	|
+![Preview Gallery](/demo/img/preview_gallery.gif?raw=true "Preview Gallery")| ![Preview Video](/demo/img/preview_video.gif?raw=true "Preview Video")		|
 
 
 =======
@@ -62,7 +65,7 @@ Attributes
 
 |     att       |    	  var         |    default value    |           			  possible values         		    |
 |:-------------:|:-------------------:|:-------------------:|:---------------------------------------------------------:|		
-|     type  	|        type         |       right         |      			right, left, top, bottom		  			|
+|     type  	|        type         |       right         |      			right, left, bottom,top 		  			|
 |    amount		|     imageAmount     |         -1          |    						 any integer   		   	   	    |
 |  	 btext		|       buttonText    |       Post          |    						 any string   		   	   	    |
 |  	 bclass 	|       buttonClass   |       primary       |  default, primary, success, info, warning, danger, link 	|
