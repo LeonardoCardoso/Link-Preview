@@ -113,14 +113,14 @@
 .lp-preview-description {
     font-size: 13px;
     word-break: break-word;
-    padding-right: 0;
+    padding-right: 5px;
     padding-left: 5px;
     margin-top: 5px;
 }
 
 .lp-preview-title {
     padding-left: 5px !important;
-    padding-right: 0 !important;
+    padding-right: 5px !important;
 }
 
 .lp-preview-title-close {
@@ -212,4 +212,42 @@
 
 .lp-outer-posted a.lp-post-link:hover {
     text-decoration: underline !important;
+}
+
+/** Left */
+
+.lp-prepost-wrap.lp-left {
+    text-align: right;
+}
+
+.lp-preview-title-wrap.lp-left, .lp-preview-description-wrap.lp-left {
+    padding: 0 5px 0 0 !important;
+}
+
+.lp-preview-canonical-url.lp-left {
+    padding-left: 6px;
+    padding-right: 10px;
+}
+
+.lp-preview-thubmnail-pagination.lp-left, .lp-preview-thubmnail-text.lp-left {
+    padding-left: 0px;
+    padding-right: 8px;
+    float: right;
+    padding-top: 5px;
+}
+
+.lp-preview-thubmnail-buttons.lp-left {
+    float: right;
+}
+
+.lp-preview-no-thubmnail-text.lp-left {
+    float: right;
+}
+
+.lp-preview-no-thubmnail.lp-left.tweak {
+    padding-right: 15px;
+}
+
+.lp-preview-no-thubmnail.lp-left {
+    padding-right: 5px;
 }

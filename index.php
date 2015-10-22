@@ -38,9 +38,10 @@
     <div class="col-sm-4 demo-col-padding">
         <link-preview
             ltext="Carregando"
-            tpage="%N de %N"
-            btext="Postar"
-            ctext="Cancelar"
+            tpage="%N ➜ %N"
+            btext="Post This Preview"
+            type="left"
+            cbtext="Go Back"
             iamount="10"/>
     </div>
     <div class="col-sm-4 demo-col-padding">

@@ -16,9 +16,9 @@ include_once "classes/Highlight.php";
 
 SetUp::init();
 
-$data = json_decode($_POST["data"]);
+$data = json_decode(base64_decode($_POST["data"]));
 
-$text = base64_decode($data->text);
+$text = $data->text;
 $description = $data->description;
 
 $answer = array("text" => Highlight::url($text), "description" => Highlight::url($description));

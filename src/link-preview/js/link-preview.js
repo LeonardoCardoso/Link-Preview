@@ -152,14 +152,14 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
 
                         var url = 'src/link-preview/php/textCrawler.php';
                         var jsonData = angular.toJson({
-                            text: window.btoa($text),
+                            text: $text,
                             imageAmount: $scope.imageAmount
                         });
 
                         $http({
                             url: url,
                             method: "POST",
-                            data: "data=" + jsonData,
+                            data: "data=" + window.btoa(jsonData),
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         }).success(function (data, status, headers, config) {
 
@@ -247,14 +247,14 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
 
                     var url = 'src/link-preview/php/highlightUrls.php';
                     var jsonData = angular.toJson({
-                        text: window.btoa($scope.userTyping),
+                        text: $scope.userTyping,
                         description: $scope.preview.description
                     });
 
                     $http({
                         url: url,
                         method: "POST",
-                        data: "data=" + jsonData,
+                        data: "data=" + window.btoa(jsonData),
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                     }).success(function (data, status, headers, config) {
 
@@ -275,7 +275,11 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
             };
 
         },
-        // do not remove lp-* classes, you can customize them though
-        templateUrl: 'src/link-preview/template/link-preview.html'
+        templateUrl: function (elem, attrs) {
+            var file = attrs.type || 'right';
+            return 'src/link-preview/template/link-preview-' + file + '.html'
+        }
+        //// do not remove lp-* classes, you can customize them though
+        //templateUrl: 'src/link-preview/template/link-preview.html'
     };
 }]);

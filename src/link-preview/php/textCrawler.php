@@ -10,9 +10,9 @@ include_once "classes/LinkPreview.php";
 
 SetUp::init();
 
-$data = json_decode($_POST["data"]);
+$data = json_decode(base64_decode($_POST["data"]));
 
-$text = base64_decode($data->text);
+$text = $data->text;
 $imageAmount = $data->imageAmount;
 $text = str_replace("\n", " ", $text);
 $header = "";
