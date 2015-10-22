@@ -47,12 +47,12 @@
 }
 
 .lp-preview-thubmnail {
-    padding-left: 5px;
+    padding-left: 10px;
     margin-top: 5px;
 }
 
 .lp-preview-no-thubmnail {
-    padding-left: 5px;
+    padding-left: 10px;
     margin-top: 5px;
 }
 
@@ -75,7 +75,7 @@
 
 .lp-preview-no-thubmnail-text {
     font-size: 11px;
-    padding-left: 2px;
+    padding-left: 0;
 }
 
 .lp-preview-no-thubmnail-text input {
@@ -87,15 +87,26 @@
 }
 
 .lp-preview-replace-title {
-    padding-left: 6px;
     height: 21px;
     font-weight: bold;
 }
 
 .lp-preview-replace-description {
-    padding-left: 6px;
     height: 90px !important;
     font-size: 13px;
+}
+
+.lp-preview-replace-title-wrap {
+    padding-left: 5px;
+    padding-right: 0;
+}
+
+.lp-preview-replace-description-wrap {
+    padding: 0 0 0 8px !important;
+}
+
+.lp-preview-replace-description-wrap textarea, .lp-preview-replace-title-wrap input {
+    padding: 4px !important;
 }
 
 .lp-preview-title-wrap {
@@ -240,16 +251,29 @@
     float: right;
 }
 
+.lp-preview-thubmnail.lp-left {
+    padding-right: 10px;
+}
+
 .lp-preview-no-thubmnail-text.lp-left {
     float: right;
 }
 
 .lp-preview-no-thubmnail.lp-left.tweak {
-    padding-right: 15px;
+    padding-right: 10px;
 }
 
 .lp-preview-no-thubmnail.lp-left {
     padding-right: 5px;
+}
+
+.lp-preview-replace-title-wrap.lp-left {
+    padding-left: 0;
+    padding-right: 5px;
+}
+
+.lp-preview-replace-description-wrap.lp-left {
+    padding: 0 5px 0 0 !important;
 }
 
 /** Posted Left */
@@ -286,4 +310,75 @@
         margin-top: 8px;
         margin-bottom: 4px;
     }
+}
+
+/** Bottom */
+
+.lp-prepost-wrap.lp-bottom {
+    margin-top: 8px !important;
+}
+
+.lp-preview-title-wrap.lp-bottom, .lp-preview-description-wrap.lp-bottom {
+    padding: 0 !important;
+}
+
+.lp-preview-canonical-url.lp-bottom {
+    padding-left: 5px !important;
+}
+
+.lp-preview-replace-title-wrap.lp-bottom {
+    padding: 0 !important;
+}
+
+.lp-preview-replace-description-wrap.lp-bottom {
+    padding: 0 !important;
+}
+
+.lp-preview-thubmnail-pagination.lp-bottom, .lp-preview-thubmnail-text.lp-bottom {
+    padding-bottom: 0px;
+    padding-right: 8px;
+    float: right;
+    padding-top: 5px;
+}
+
+.lp-preview-thubmnail-buttons.lp-bottom {
+    float: right;
+}
+
+.lp-preview-thubmnail.lp-bottom {
+    padding-right: 0;
+}
+
+.lp-preview-no-thubmnail-text.lp-bottom {
+    float: right;
+}
+
+.lp-preview-no-thubmnail.lp-bottom.tweak {
+    padding-right: 0;
+}
+
+.lp-preview-no-thubmnail.lp-bottom {
+    padding-right: 0;
+}
+
+/** Posted Bottom */
+
+.lp-posted-wrap.lp-bottom {
+    margin-top: 8px !important;
+}
+
+.lp-posted-title-wrap.lp-bottom, .lp-posted-description-wrap.lp-bottom {
+    padding: 0 !important;
+}
+
+.lp-posted-image.lp-bottom {
+    margin-bottom: 10px;
+}
+
+.lp-posted-title.lp-bottom, .lp-posted-description.lp-bottom {
+    padding: 0 !important;
+}
+
+.lp-posted-canonical-url.lp-bottom {
+    padding-left: 0 !important;
 }

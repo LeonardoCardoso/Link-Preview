@@ -65,7 +65,7 @@ Attributes
 
 |     att       |    	  var         |    default value    |           			  possible values         		    |
 |:-------------:|:-------------------:|:-------------------:|:---------------------------------------------------------:|		
-|     type  	|        type         |       right         |      			right, left, bottom,top 		  			|
+|     type  	|        type         |       right         |      			right, left, bottom, top (text position) 	|
 |    amount		|     imageAmount     |         -1          |    						 any integer   		   	   	    |
 |  	 btext		|       buttonText    |       Post          |    						 any string   		   	   	    |
 |  	 bclass 	|       buttonClass   |       primary       |  default, primary, success, info, warning, danger, link 	|
@@ -90,6 +90,8 @@ Attributes
 			ltext="" 
 			btext="" 
 			bclass=""
+			ctext="" 
+			cclass=""
 			dtitle="" 
 			ddescription="" />
 
@@ -116,10 +118,10 @@ Make sure your columns are the same as those ones in [linkpreview.sql](https://g
 	   "pageUrl":"page url",
 	   "canonicalUrl":"canonical url",
 	   "description":"description",
-	   "images": "array of images",
+	   "images": ["array of images"],
 	   "image": "first image of images",
 	   "video":"yes|no",
-	   "videoIframe":"video iframe if it is video"
+	   "videoIframe":"video iframe, if it is a video"
 	}
 ```
 

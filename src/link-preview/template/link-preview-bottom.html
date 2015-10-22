@@ -6,17 +6,22 @@
 
 <div class="clearfix col-md-12 lp-prepost" ng-class="{'lg-display-hide': hidePreview == true}">
 
-    <div class="lp-prepost-wrap lp-left"
-         ng-class="{'col-sm-12': noThumbnail == true, 'col-sm-9': noThumbnail == false}">
+    <div class="col-sm-12 lp-preview-image lp-bottom" ng-class="{'lg-display-hide': noThumbnail == true}">
 
-        <div class="col-sm-12 lp-preview-title-wrap lp-left"
+        <img ng-src="{{preview.image}}">
+
+    </div>
+
+    <div class="lp-prepost-wrap lp-bottom col-sm-12">
+
+        <div class="col-sm-12 lp-preview-title-wrap lp-bottom"
              ng-class="{'lg-display-hide': previewTitleEditing == true}">
 
             <span class="lp-preview-title col-md-12" ng-click="editPreviewTitle()">{{preview.title}}</span>
 
         </div>
 
-        <div class="col-sm-12 lp-preview-replace-title-wrap lp-left"
+        <div class="col-sm-12 lp-preview-replace-title-wrap lp-bottom"
              ng-class="{'lg-display-hide': previewTitleEditing == false}">
             <input class="form-control lp-preview-replace-title"
                    id="editPreviewTitle"
@@ -24,17 +29,17 @@
                    placeholder="{{preview.title}}">
         </div>
 
-        <div class="col-sm-12 lp-preview-canonical-url lp-left">{{preview.canonicalUrl}}</div>
+        <div class="col-sm-12 lp-preview-canonical-url lp-bottom">{{preview.canonicalUrl}}</div>
 
-        <div class="col-sm-12 lp-preview-description-wrap lp-left">
-            <div class="lp-preview-description lp-left"
+        <div class="col-sm-12 lp-preview-description-wrap lp-bottom">
+            <div class="lp-preview-description"
                  ng-click="editPreviewDescription()"
                  ng-class="{'lg-display-hide': previewDescriptionEditing == true}">
                 {{preview.description}}
             </div>
         </div>
 
-        <div class="col-sm-12 lp-preview-replace-description-wrap lp-left"
+        <div class="col-sm-12 lp-preview-replace-description-wrap lp-bottom"
              ng-class="{'lg-display-hide': previewDescriptionEditing == false}">
             <textarea
                     class="form-control lp-no-resize lp-preview-replace-description"
@@ -42,10 +47,10 @@
             </textarea>
         </div>
 
-        <div class="clearfix col-sm-12 lp-preview-thubmnail lp-left"
+        <div class="clearfix col-sm-12 lp-preview-thubmnail lp-bottom"
              ng-class="{'lg-display-hide': noThumbnail == true}">
 
-            <span class="lp-preview-thubmnail-buttons lp-left">
+            <span class="lp-preview-thubmnail-buttons lp-bottom">
 
                 <button class="btn btn-sm"
                         ng-click="previousImage()"
@@ -67,16 +72,15 @@
 
             </span>
 
-            <span class="lp-preview-thubmnail-pagination lp-left">{{thumbnailPaginationText}}</span>
+            <span class="lp-preview-thubmnail-pagination lp-bottom">{{thumbnailPaginationText}}</span>
 
-            <span class="lp-preview-thubmnail-text lp-left">{{thubmnailText}}</span>
+            <span class="lp-preview-thubmnail-text lp-bottom">{{thubmnailText}}</span>
 
         </div>
 
-        <div class="col-sm-12 lp-preview-no-thubmnail lp-left"
-             ng-class="{'lg-display-hide': noImage == true, 'tweak': noThumbnail == false}">
+        <div class="col-sm-12 lp-preview-no-thubmnail lp-bottom" ng-class="{'lg-display-hide': noImage == true}">
 
-            <label class="checkbox-inline lp-preview-no-thubmnail-text lp-left">
+            <label class="checkbox-inline lp-preview-no-thubmnail-text lp-bottom tweak">
 
                 <input type="checkbox" ng-model="noThumbnail">
 
@@ -85,14 +89,6 @@
             </label>
 
         </div>
-
-    </div>
-
-    <div class="col-sm-3 lp-preview-image lp-left" ng-class="{'lg-display-hide': noThumbnail == true}">
-
-
-        <img ng-src="{{preview.image}}">
-
 
     </div>
 
@@ -133,32 +129,31 @@
 <div class="lp-outer-posted" ng-repeat="post in posts">
 
 
-    <div class="clearfix col-md-12 lp-posted lp-left">
+    <div class="clearfix col-md-12 lp-posted lp-bottom">
 
         <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="post.text"></span>
 
         <a href="{{post.pageUrl}}" target="_blank">
 
-            <div class="lp-posted-wrap"
-                 ng-class="{'col-sm-12': post.image == '', 'col-sm-9': post.image != ''}">
-                <div class="col-sm-12 lp-posted-title lp-left">{{post.title}}</div>
-
-                <div class="col-sm-12 lp-posted-canonical-url lp-left">{{post.canonicalUrl}}</div>
-
-                <div class="col-sm-12 lp-posted-description lp-left" ng-bind-html="post.description"></div>
-            </div>
-
-            <div class="col-sm-3 lp-posted-image lp-left" ng-class="{'lg-display-hide': post.image == ''}">
+            <div class="col-sm-12 lp-posted-image lp-bottom" ng-class="{'lg-display-hide': post.image == ''}">
 
                 <img ng-src="{{post.image}}">
 
+            </div>
+
+            <div class="lp-posted-wrap col-sm-12">
+                <div class="col-sm-12 lp-posted-title lp-bottom">{{post.title}}</div>
+
+                <div class="col-sm-12 lp-posted-canonical-url lp-bottom">{{post.canonicalUrl}}</div>
+
+                <div class="col-sm-12 lp-posted-description lp-bottom" ng-bind-html="post.description"></div>
             </div>
 
         </a>
 
         <span class="col-sm-12 lp-span">
 
-            <span class="pull-left lp-posted-close" ng-click="deletePosted(post, $index)">
+            <span class="pull-right lp-posted-close" ng-click="deletePosted(post, $index)">
                 <i class="fa fa-close"></i>
             </span>
 

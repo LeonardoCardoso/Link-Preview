@@ -21,11 +21,13 @@
 
         </div>
 
-        <input class="form-control col-sm-12 lp-preview-replace-title"
-               id="editPreviewTitle"
-               ng-class="{'lg-display-hide': previewTitleEditing == false}"
-               ng-model="preview.title" type="text"
-               placeholder="{{preview.title}}">
+        <div class="col-sm-12 lp-preview-replace-title-wrap"
+             ng-class="{'lg-display-hide': previewTitleEditing == false}">
+            <input class="form-control lp-preview-replace-title"
+                   id="editPreviewTitle"
+                   ng-model="preview.title" type="text"
+                   placeholder="{{preview.title}}">
+        </div>
 
         <div class="col-sm-12 lp-preview-canonical-url">{{preview.canonicalUrl}}</div>
 
@@ -37,11 +39,13 @@
             </div>
         </div>
 
-        <textarea
-                class="col-md-12 form-control lp-no-resize lp-preview-replace-description"
-                ng-class="{'lg-display-hide': previewDescriptionEditing == false}"
-                ng-model="preview.description">
-        </textarea>
+        <div class="col-sm-12 lp-preview-replace-description-wrap"
+             ng-class="{'lg-display-hide': previewDescriptionEditing == false}">
+            <textarea
+                    class="form-control lp-no-resize lp-preview-replace-description"
+                    ng-model="preview.description">
+            </textarea>
+        </div>
 
         <div class="clearfix col-sm-12 lp-preview-thubmnail" ng-class="{'lg-display-hide': noThumbnail == true}">
 
