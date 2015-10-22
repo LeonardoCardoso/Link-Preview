@@ -30,6 +30,7 @@
     margin-top: 10px;
     border: 1px #eee solid;
     padding: 5px;
+    word-wrap: break-word;
 }
 
 .lp-prepost-wrap {
@@ -152,6 +153,7 @@
     margin-top: 40px;
     border: 1px #eee solid;
     padding: 5px;
+    word-wrap: break-word;
 }
 
 .lp-posted-wrap {

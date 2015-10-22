@@ -12,7 +12,7 @@ SetUp::init();
 
 $data = json_decode($_POST["data"]);
 
-$text = $data->text;
+$text = base64_decode($data->text);
 $imageAmount = $data->imageAmount;
 $text = str_replace("\n", " ", $text);
 $header = "";

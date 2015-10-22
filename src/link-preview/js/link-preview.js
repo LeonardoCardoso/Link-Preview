@@ -7,7 +7,7 @@
  */
 app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $http, $sce) {
 
-    var URL_REGEX = /((https?|ftp)\:\/\/)?([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-z0-9-.]*)\.([a-z]{2,3})(\:[0-9]{2,5})?(\/([a-z0-9+\$_\-~@\(\)\%]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/i;
+    var URL_REGEX = /((https?|ftp)\:\/\/)?([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-z0-9-.]*)\.([a-z]{2,3})(\:[0-9]{2,5})?(\/([a-z0-9+\$_\-~@\(\)\%]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&#%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/i;
 
     var trim = function (str) {
         return str.replace(/\s+/g, ' ').trim();
@@ -70,7 +70,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
         $scope.currentImageIndex = 1;
 
         $scope.preview = {
-            text: "",
+            "text": "",
             "title": "",
             "url": "",
             "pageUrl": "",
@@ -152,7 +152,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
 
                         var url = 'src/link-preview/php/textCrawler.php';
                         var jsonData = angular.toJson({
-                            text: $text,
+                            text: window.btoa($text),
                             imageAmount: $scope.imageAmount
                         });
 
@@ -247,7 +247,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
 
                     var url = 'src/link-preview/php/highlightUrls.php';
                     var jsonData = angular.toJson({
-                        text: $scope.userTyping,
+                        text: window.btoa($scope.userTyping),
                         description: $scope.preview.description
                     });
 

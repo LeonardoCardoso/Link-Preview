@@ -18,7 +18,7 @@ SetUp::init();
 
 $data = json_decode($_POST["data"]);
 
-$text = $data->text;
+$text = base64_decode($data->text);
 $description = $data->description;
 
 $answer = array("text" => Highlight::url($text), "description" => Highlight::url($description));
