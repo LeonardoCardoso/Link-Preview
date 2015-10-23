@@ -265,11 +265,18 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                     }).success(function (data, status, headers, config) {
 
                             // Saving in db
+                            if ($scope.noThumbnail) {
+                                preview.image = '';
+                            }
+
                             var url = 'src/link-preview/php/save.php';
                             var jsonData = angular.toJson({
                                 text: $scope.userTyping,
                                 data: preview
                             });
+
+                            console.log(jsonData);
+
                             $http({
                                 url: url,
                                 method: "POST",
@@ -311,12 +318,18 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                 return post.video == false || $scope.showIframe == true;
             };
 
+            $scope.layoutWithoutImage = function (post) {
+                return post.image == '' || $scope.showIframe == true;
+            };
+
+            $scope.layoutWithImage = function (post) {
+                return post.image != '' || (post.video == true && $scope.showIframe == false);
+            };
+
         },
         templateUrl: function (elem, attrs) {
             var file = attrs.type || 'right';
             return 'src/link-preview/template/link-preview-' + file + '.html'
         }
-    }
-        ;
-}])
-;
+    };
+}]);

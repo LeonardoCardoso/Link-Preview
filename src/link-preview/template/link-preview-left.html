@@ -145,17 +145,17 @@
         <a href="{{post.pageUrl}}" target="_blank">
 
             <div class="lp-posted-wrap"
-                 ng-class="{'col-sm-12': post.image == '', 'col-sm-9': post.image != '', 'col-sm-12': showIframe == true, 'col-sm-9': showIframe == false}">
+                 ng-class="{'col-sm-12': layoutWithoutImage(post), 'col-sm-9': layoutWithImage(post)}">
                 <div class="col-sm-12 lp-posted-title lp-left"
-                     ng-class="{'lp-posted-title-iframe': showIframe == true}">{{post.title}}
+                     ng-class="{'lp-posted-title-iframe': layoutWithoutImage(post)}">{{post.title}}
                 </div>
 
                 <div class="col-sm-12 lp-posted-canonical-url lp-left"
-                     ng-class="{'lp-posted-canonical-url-iframe': showIframe == true}">{{post.canonicalUrl}}
+                     ng-class="{'lp-posted-canonical-url-iframe': layoutWithoutImage(post)}">{{post.canonicalUrl}}
                 </div>
 
                 <div class="col-sm-12 lp-posted-description lp-left"
-                     ng-class="{'lp-posted-description-iframe': showIframe == true}"
+                     ng-class="{'lp-posted-description-iframe': layoutWithoutImage(post)}"
                      ng-bind-html="descriptionHTML"></div>
             </div>
 

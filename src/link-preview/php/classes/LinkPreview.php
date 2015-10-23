@@ -132,6 +132,8 @@ class LinkPreview
 
             $description = strip_tags($description);
 
+            $videoIframe = $videoIframe == null ? "" : $videoIframe;
+
             $answer = array(
                 "title" => $title,
                 "url" => $finalLink,
