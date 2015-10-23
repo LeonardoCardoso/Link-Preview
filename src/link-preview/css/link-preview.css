@@ -26,11 +26,11 @@
 
 .lp-play {
     color: white;
-    font-size: 18px;
+    font-size: 11px;
     background-color: rgba(0, 0, 0, 0.55);
     border: white 1px solid;
     padding: 5px 14px;
-    margin: -35px 5px 5px 6px;
+    margin: -27px 5px 5px 4px;
 }
 
 /** Preview */
@@ -286,6 +286,15 @@
     padding: 0 5px 0 0 !important;
 }
 
+.lp-play.lp-left {
+    color: white;
+    font-size: 11px;
+    background-color: rgba(0, 0, 0, 0.55);
+    border: white 1px solid;
+    padding: 5px 14px;
+    margin: -27px 5px 5px 4px;
+}
+
 /** Posted Left */
 
 .lp-posted-wrap.lp-left, .lp-posted.lp-left {
@@ -369,6 +378,15 @@
 
 .lp-preview-no-thubmnail.lp-bottom {
     padding-right: 0;
+}
+
+.lp-play.lp-bottom {
+    color: white;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.55);
+    border: white 1px solid;
+    padding: 5px 14px;
+    margin: -35px 5px 5px 5px;
 }
 
 /** Posted Bottom */
@@ -468,4 +486,31 @@
 
 .lp-posted-canonical-url.lp-top {
     padding-left: 0 !important;
+}
+
+.lp-play.lp-top {
+    color: white;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.55);
+    border: white 1px solid;
+    padding: 5px 14px;
+    margin: -35px 5px 5px 5px;
+}
+
+/** iframe */
+
+.lp-posted-title-iframe, .lp-posted-description-iframe, .lp-posted-canonical-url-iframe {
+    padding-left: 0 !important;
+}
+
+.lp-posted-image-iframe {
+    margin-bottom: 5px;
+}
+
+.lp-left.lp-posted-title-iframe, .lp-left.lp-posted-description-iframe, .lp-left.lp-posted-canonical-url-iframe {
+    padding-right: 0 !important;
+}
+
+.lp-vine-fix {
+    padding-bottom: 100% !important;
 }

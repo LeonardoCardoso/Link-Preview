@@ -10,7 +10,7 @@
 
         <img ng-src="{{preview.image}}">
 
-        <span><i class="fa fa-play lp-play" ng-class="{'lg-display-hide': preview.video == false}"></i></span>
+        <span><i class="fa fa-play lp-play lp-bottom" ng-class="{'lg-display-hide': preview.video == false}"></i></span>
 
     </div>
 
@@ -140,10 +140,10 @@
 
             <img ng-src="{{post.image}}" ng-class="{'lg-display-hide': showIframe == true}">
 
-            <span><i class="fa fa-play lp-play"
+            <span><i class="fa fa-play lp-play lp-bottom"
                      ng-class="{'lg-display-hide': post.video == false, 'lg-display-hide': showIframe == true}"></i></span>
 
-            <span ng-bind-html="post.videoIframe" class="embed-responsive embed-responsive-16by9"
+            <span ng-bind-html="post.videoIframe"
                   ng-class="{'lg-display-hide': showIframe == false}"></span>
 
         </div>

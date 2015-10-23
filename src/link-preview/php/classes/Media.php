@@ -20,7 +20,7 @@ class Media
         if (preg_match("/(.*?)v=(.*?)($|&)/i", $url, $matching)) {
             $vid = $matching[2];
             array_push($media, "http://i2.ytimg.com/vi/$vid/hqdefault.jpg");
-            array_push($media, '<iframe id="' . date("YmdHis") . $vid . '" class="embed-responsive-item" width="499" height="368" src="http://www.youtube.com/embed/' . $vid . '" frameborder="0" allowfullscreen></iframe>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9"><iframe id="' . date("YmdHis") . $vid . '" class="embed-responsive-item" width="499" height="368" src="http://www.youtube.com/embed/' . $vid . '" frameborder="0" allowfullscreen></iframe></div>');
         } else {
             array_push($media, "", "");
         }
@@ -37,7 +37,7 @@ class Media
         if ($breakUrl[2] != "") {
             $vid = $breakUrl[2];
             array_push($media, Media::mediaVineThumb($vid));
-            array_push($media, '<iframe id="' . date("YmdHis") . $vid . '" class="vine-embed" src="https://vine.co/v/' . $vid . '/embed/simple" width="499" height="499" frameborder="0"></iframe><script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9 lp-vine-fix"><iframe id="' . date("YmdHis") . $vid . '" class="vine-embed embed-responsive-item" src="https://vine.co/v/' . $vid . '/embed/simple" width="499" height="499" frameborder="0"></iframe></div><script async src="//platform.vine.co/static/scripts/embed.js" charset="utf-8"></script>');
         } else {
             array_push($media, "", "");
         }
@@ -63,7 +63,7 @@ class Media
             $imgId = $breakUrl[1];
             $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$imgId.php"));
             array_push($media, $hash[0]['thumbnail_large']);
-            array_push($media, '<iframe id="' . date("YmdHis") . $imgId . '" class="embed-responsive-item" width="499" height="280" src="http://player.vimeo.com/video/' . $imgId . '" width="654" height="368" frameborder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen ></iframe>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9"><iframe id="' . date("YmdHis") . $imgId . '" class="embed-responsive-item" width="499" height="280" src="http://player.vimeo.com/video/' . $imgId . '" width="654" height="368" frameborder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen ></iframe></div>');
         } else {
             array_push($media, "", "");
         }
@@ -79,7 +79,7 @@ class Media
             $vid = $matching[1];
             $vtitle = trim($matching[2], "/");
             array_push($media, "http://s4.mcstatic.com/thumb/{$vid}/0/6/videos/0/6/{$vtitle}.jpg");
-            array_push($media, '<iframe id="' . date("YmdHis") . $vid . '" class="embed-responsive-item" width="499" height="368" src="http://www.metacafe.com/embed/' . $vid . '" allowFullScreen frameborder=0></iframe>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9"><iframe id="' . date("YmdHis") . $vid . '" class="embed-responsive-item" width="499" height="368" src="http://www.metacafe.com/embed/' . $vid . '" allowFullScreen frameborder=0></iframe></div>');
         } else {
             array_push($media, "", "");
         }
@@ -97,7 +97,7 @@ class Media
             //array_push($media, $hash['thumbnail_url']);
 
             array_push($media, "http://www.dailymotion.com/thumbnail/160x120/video/$id");
-            array_push($media, '<iframe id="' . date("YmdHis") . $id . '" class="embed-responsive-item" width="499" height="368" src="http://www.dailymotion.com/embed/video/' . $id . '" allowFullScreen frameborder=0></iframe>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9"><iframe id="' . date("YmdHis") . $id . '" class="embed-responsive-item" width="499" height="368" src="http://www.dailymotion.com/embed/video/' . $id . '" allowFullScreen frameborder=0></iframe></div>');
         } else {
             array_push($media, "", "");
         }
@@ -114,7 +114,7 @@ class Media
             $hash = file_get_contents("http://www.collegehumor.com/oembed.json?url=http://www.dailymotion.com/embed/video/$id");
             $hash = json_decode($hash, true);
             array_push($media, $hash['thumbnail_url']);
-            array_push($media, '<iframe id="' . date("YmdHis") . $id . '" class="embed-responsive-item" width="499" height="368" src="http://www.collegehumor.com/e/' . $id . '" allowFullScreen frameborder=0></iframe>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9"><iframe id="' . date("YmdHis") . $id . '" class="embed-responsive-item" width="499" height="368" src="http://www.collegehumor.com/e/' . $id . '" allowFullScreen frameborder=0></iframe></div>');
         } else {
             array_push($media, "", "");
         }
@@ -132,7 +132,7 @@ class Media
             preg_match('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $hash['html'], $matching);
             $src = $matching[1];
             array_push($media, $hash['thumbnail_url']);
-            array_push($media, '<iframe id="' . date("YmdHis") . 'blip" class="embed-responsive-item" width="499" height="368" src="' . $src . '" allowFullScreen frameborder=0></iframe>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9"><iframe id="' . date("YmdHis") . 'blip" class="embed-responsive-item" width="499" height="368" src="' . $src . '" allowFullScreen frameborder=0></iframe></div>');
         } else {
             array_push($media, "", "");
         }
@@ -149,7 +149,7 @@ class Media
             preg_match('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $hash['html'], $matching);
             $src = $matching[1];
             array_push($media, $hash['thumbnail_url']);
-            array_push($media, '<iframe id="' . date("YmdHis") . 'funnyordie" class="embed-responsive-item" width="499" height="368" src="' . $src . '" allowFullScreen frameborder=0></iframe>');
+            array_push($media, '<div class="embed-responsive embed-responsive-16by9"><iframe id="' . date("YmdHis") . 'funnyordie" class="embed-responsive-item" width="499" height="368" src="' . $src . '" allowFullScreen frameborder=0></iframe></div>');
         } else {
             array_push($media, "", "");
         }

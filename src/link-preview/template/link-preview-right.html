@@ -10,6 +10,8 @@
 
         <img ng-src="{{preview.image}}">
 
+        <span><i class="fa fa-play lp-play" ng-class="{'lg-display-hide': preview.video == false}"></i></span>
+
     </div>
 
     <div class="lp-prepost-wrap" ng-class="{'col-sm-12': noThumbnail == true, 'col-sm-9': noThumbnail == false}">
@@ -132,23 +134,36 @@
 
         <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="post.text"></span>
 
+        <span ng-bind-html="post.videoIframe" class="col-sm-12"
+              ng-class="{'lg-display-hide': showIframe == false}"></span>
+
+        <div class="col-sm-3 lp-posted-image"
+             ng-class="{'lg-display-hide': post.image == '', 'lp-posted-image-iframe': showIframe == true}"
+             ng-click="imageAction(post)">
+
+            <img ng-src="{{post.image}}" ng-class="{'lg-display-hide': showIframe == true}">
+
+            <span><i class="fa fa-play lp-play"
+                     ng-class="{'lg-display-hide': post.video == false, 'lg-display-hide': showIframe == true}"></i></span>
+
+        </div>
+
         <a href="{{post.pageUrl}}" target="_blank">
 
-            <div class="col-sm-3 lp-posted-image" ng-class="{'lg-display-hide': post.image == ''}">
-
-                <img ng-src="{{post.image}}">
-
-            </div>
-
             <div class="lp-posted-wrap"
-                 ng-class="{'col-sm-12': post.image == '', 'col-sm-9': post.image != ''}">
-                <div class="col-sm-12 lp-posted-title">{{post.title}}</div>
+                 ng-class="{'col-sm-12': post.image == '', 'col-sm-9': post.image != '', 'col-sm-12': showIframe == true, 'col-sm-9': showIframe == false}">
+                <div class="col-sm-12 lp-posted-title" ng-class="{'lp-posted-title-iframe': showIframe == true}">
+                    {{post.title}}
+                </div>
 
-                <div class="col-sm-12 lp-posted-canonical-url">{{post.canonicalUrl}}</div>
+                <div class="col-sm-12 lp-posted-canonical-url"
+                     ng-class="{'lp-posted-canonical-url-iframe': showIframe == true}">{{post.canonicalUrl}}
+                </div>
 
-                <div class="col-sm-12 lp-posted-description" ng-bind-html="post.description"></div>
+                <div class="col-sm-12 lp-posted-description"
+                     ng-class="{'lp-posted-description-iframe': showIframe == true}"
+                     ng-bind-html="post.description"></div>
             </div>
-
 
         </a>
 

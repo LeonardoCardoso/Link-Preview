@@ -39,7 +39,7 @@
         <link-preview
             tpage="%N ➜ %N"
             btext="Post This Preview"
-            type="bottom"
+            type="top"
             cbtext="Go Back"
             iamount="10"/>
     </div>
@@ -48,14 +48,14 @@
             placeholder="Placeholder"
             limage="http://4.bp.blogspot.com/-L2Td-3QtUTo/UcbAvCQTYvI/AAAAAAAAAUM/Z4_GBilAu9g/s1600/spinner_64_3f4fa14117c586c002a98cd7c5fbb2d3.gif"
             btext="Submit"
-            type="bottom"
             ltext=""
             ttext=""
             bclass="default"/>
     </div>
     <div class="col-sm-4 demo-col-padding">
         <link-preview placeholder="What's in your mind?"
-                      limage="src/link-preview/img/loader.gif"
+                      type="left"
+                      limage="demo/img/loader.gif"
                       bclass="success"/>
     </div>
 

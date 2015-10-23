@@ -298,7 +298,5 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
             var file = attrs.type || 'right';
             return 'src/link-preview/template/link-preview-' + file + '.html'
         }
-        //// do not remove lp-* classes, you can customize them though
-        //templateUrl: 'src/link-preview/template/link-preview.html'
     };
 }]);
