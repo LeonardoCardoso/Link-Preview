@@ -133,7 +133,7 @@
 
     <div class="clearfix col-md-12 lp-posted lp-top">
 
-        <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="post.text"></span>
+        <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="textHTML"></span>
 
         <a href="{{post.pageUrl}}" target="_blank">
 
@@ -142,7 +142,7 @@
 
                 <div class="col-sm-12 lp-posted-canonical-url lp-top">{{post.canonicalUrl}}</div>
 
-                <div class="col-sm-12 lp-posted-description lp-top" ng-bind-html="post.description"></div>
+                <div class="col-sm-12 lp-posted-description lp-top" ng-bind-html="descriptionHTML"></div>
             </div>
 
         </a>
@@ -155,7 +155,7 @@
             <span><i class="fa fa-play lp-play lp-top"
                      ng-class="{'lg-display-hide': hidePlay(post)}"></i></span>
 
-            <span ng-bind-html="post.videoIframe"
+            <span ng-bind-html="videoIframeHTML"
                   ng-class="{'lg-display-hide': showIframe == false}"></span>
 
         </div>

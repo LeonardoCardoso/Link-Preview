@@ -137,9 +137,9 @@
 
     <div class="clearfix col-md-12 lp-posted lp-left">
 
-        <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="post.text"></span>
+        <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="textHTML"></span>
 
-        <span ng-bind-html="post.videoIframe" class="col-sm-12 lp-iframe"
+        <span ng-bind-html="videoIframeHTML" class="col-sm-12 lp-iframe"
               ng-class="{'lg-display-hide': showIframe == false}"></span>
 
         <a href="{{post.pageUrl}}" target="_blank">
@@ -156,7 +156,7 @@
 
                 <div class="col-sm-12 lp-posted-description lp-left"
                      ng-class="{'lp-posted-description-iframe': showIframe == true}"
-                     ng-bind-html="post.description"></div>
+                     ng-bind-html="descriptionHTML"></div>
             </div>
 
         </a>

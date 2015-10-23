@@ -18,14 +18,16 @@ class Database
     {
         $conn = Database::connect();
 
-        $save = array_map("mysql_real_escape_string", $save);
+        $query =
+            "INSERT INTO
+              `linkpreview`.`linkpreview`
+              (`id`, `text`, `image`, `title`, `canonicalUrl`, `url`, `pageUrl`, `description`, `iframe`)
+              VALUES (NULL, '" . $save->text . "', '" . $save->image . "', '" . $save->title . "', '" . $save->canonicalUrl . "',
+              '" . $save->url . "', '" . $save->pageUrl . "', '" . $save->description . "', '" . $save->videoIframe . "')";
 
-        $query = "INSERT INTO `linkpreview`.`linkpreview` (`id`, `text`, `image`, `title`, `canonicalUrl`, `url`, `description`, `iframe`)
-                        VALUES (NULL, '" . $save["text"] . "', '" . $save["image"] . "', '" . $save["title"] . "', '" . $save["canonicalUrl"] . "', '" . $save["url"] . "', '" . $save["description"] . "', '" . $save["iframe"] . "')";
+        mysqli_query($conn, $query);
 
-        mysql_query($query);
-
-        $id = mysql_insert_id($conn);
+        $id = mysqli_insert_id($conn);
 
         Database::close($conn);
 
@@ -36,46 +38,40 @@ class Database
     {
         $conn = Database::connect();
 
-        $delete = array_map("mysql_real_escape_string", $delete);
-
         $query = "DELETE FROM `linkpreview`.`linkpreview` WHERE `id` = '" . $delete["id"] . "'";
 
-        mysql_query($query);
+        mysqli_query($conn, $query);
 
         Database::close($conn);
     }
 
     static function connect()
     {
-
         $host = "localhost";
         $user = "root";
         $password = "";
         $database = "linkpreview";
 
-        if (!($connection = mysql_connect($host, $user, $password))) ;
+        if (!($connection = mysqli_connect($host, $user, $password, $database))) ;
 
-        mysql_query("SET character_set_results=utf8", $connection);
+        mysqli_query($connection, "SET character_set_results=utf8");
         mb_language('uni');
         mb_internal_encoding('UTF-8');
-
-        if (!($db = mysql_select_db($database, $connection))) ;
-
-        mysql_query("set names 'utf8'", $connection);
+        mysqli_query($connection, "set names 'utf8'");
 
         return $connection;
     }
 
     static function close($conn)
     {
-        mysql_close($conn);
+        mysqli_close($conn);
     }
 
     static function select()
     {
-        Database::connect();
+        $conn = Database::connect();
 
-        $sth = mysql_query("SELECT * FROM `linkpreview` ORDER BY id DESC");
+        $sth = mysqli_query($conn, "SELECT * FROM `linkpreview` ORDER BY id DESC");
 
         $rows = array();
         while ($r = mysql_fetch_assoc($sth)) {
@@ -83,7 +79,7 @@ class Database
             $r["text"] = Highlight::url($r["text"]);
             $r["description"] = Highlight::url($r["description"]);
 
-            array_push($rows, $r);
+            $rows[] = $r;
         }
 
         return $rows;

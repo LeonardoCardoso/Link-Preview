@@ -12,17 +12,11 @@ include_once "classes/SetUp.php";
 
 SetUp::headers();
 
-$save = array(
-    "text" => strip_tags($_POST["text"]),
-    "image" => strip_tags($_POST["image"]),
-    "title" => strip_tags($_POST["title"]),
-    "canonicalUrl" => strip_tags($_POST["canonicalUrl"]),
-    "url" => strip_tags($_POST["url"]),
-    "description" => strip_tags($_POST["description"]),
-    "iframe" => $_POST["iframe"],
-);
+$data = json_decode(urldecode(base64_decode($_POST["data"])));
+$dataToSave = $data->data;
+$dataToSave->text = $data->text;
 
-$id = Database::insert($save);
+$id = Database::insert($dataToSave);
 if ($id === null || $id === "") {
     echo mysql_error();
 } else {

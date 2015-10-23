@@ -168,7 +168,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                             $scope.preview = data;
 
                             if ($scope.preview.video) {
-                                $scope.preview.videoIframe = $sce.trustAsHtml(data.videoIframe);
+                                $scope.videoIframeHTML = $sce.trustAsHtml(data.videoIframe);
                             }
 
                             $scope.hasEmptyInfo($scope);
@@ -264,15 +264,32 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                     }).success(function (data, status, headers, config) {
 
-                        if ($scope.noThumbnail || $scope.noImage) {
-                            $scope.preview.image = "";
+                            // Saving in db
+                            var url = 'src/link-preview/php/save.php';
+                            var jsonData = angular.toJson({
+                                text: $scope.userTyping,
+                                data: preview
+                            });
+                            $http({
+                                url: url,
+                                method: "POST",
+                                data: "data=" + window.btoa(encodeURIComponent(jsonData)),
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            }).success(function (data, status, headers, config) {
+                            });
+
+                            if ($scope.noThumbnail || $scope.noImage) {
+                                $scope.preview.image = "";
+                            }
+                            $scope.textHTML = $sce.trustAsHtml(data.text);
+                            $scope.descriptionHTML = $sce.trustAsHtml(data.description);
+                            $scope.userTyping = "";
+                            $scope.posts.unshift(preview);
+
+                            defaultValues($scope);
                         }
-                        $scope.preview.text = $sce.trustAsHtml(data.text);
-                        $scope.preview.description = $sce.trustAsHtml(data.description);
-                        $scope.userTyping = "";
-                        $scope.posts.unshift(preview);
-                        defaultValues($scope);
-                    });
+                    )
+                    ;
                 }
             };
 
@@ -299,5 +316,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
             var file = attrs.type || 'right';
             return 'src/link-preview/template/link-preview-' + file + '.html'
         }
-    };
-}]);
+    }
+        ;
+}])
+;
