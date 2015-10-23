@@ -70,6 +70,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
         $scope.currentImageIndex = 1;
 
         $scope.preview = {
+            "id": -1,
             "text": "",
             "title": "",
             "url": "",
@@ -271,6 +272,13 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                                 post.image = '';
                             }
 
+                            if (post.title === $scope.defaultTitle) {
+                                post.title = "";
+                            }
+                            if (post.description === $scope.defaultDescription) {
+                                post.description = "";
+                            }
+
                             post.url = window.btoa(post.url);
                             post.pageUrl = window.btoa(post.pageUrl);
                             post.canonicalUrl = window.btoa(post.canonicalUrl);
@@ -280,24 +288,36 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                                 text: $scope.userTyping,
                                 data: post
                             });
+                            // Saving in db
 
                             $http({
                                 url: url,
                                 method: "POST",
                                 data: "data=" + window.btoa(encodeURIComponent(jsonData)),
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                            }).success(function (data, status, headers, config) {
+                            }).success(function (id, status, headers, config) {
+
+                                if (!isNaN(id)) {
+                                    post.id = id;
+                                }
+
+                                if ($scope.noThumbnail || $scope.noImage) {
+                                    post.image = "";
+                                }
+                                $scope.textHTML = $sce.trustAsHtml(data.text);
+                                $scope.descriptionHTML = $sce.trustAsHtml(post.description);
+                                $scope.userTyping = "";
+
+                                post.url = preview.url;
+                                post.pageUrl = preview.pageUrl;
+                                post.canonicalUrl = preview.canonicalUrl;
+
+                                $scope.posts.unshift(post);
+
+                                defaultValues($scope);
+
                             });
 
-                            if ($scope.noThumbnail || $scope.noImage) {
-                                $scope.preview.image = "";
-                            }
-                            $scope.textHTML = $sce.trustAsHtml(data.text);
-                            $scope.descriptionHTML = $sce.trustAsHtml(data.description);
-                            $scope.userTyping = "";
-                            $scope.posts.unshift(preview);
-
-                            defaultValues($scope);
                         }
                     )
                     ;
@@ -306,6 +326,22 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
 
             $scope.deletePosted = function (post, $index) {
                 $scope.posts.splice($index, 1);
+
+                if (post.id != -1) {
+                    var url = 'src/link-preview/php/delete.php';
+                    var jsonData = angular.toJson({
+                        id: post.id
+                    });
+
+                    $http({
+                        url: url,
+                        method: "POST",
+                        data: "data=" + jsonData,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    }).success(function (data, status, headers, config) {
+
+                    });
+                }
             };
 
             $scope.imageAction = function (post) {

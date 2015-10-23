@@ -12,8 +12,9 @@ include_once "classes/SetUp.php";
 
 SetUp::headers();
 
+$data = json_decode($_POST["data"]);
 $delete = array(
-    "id" => $_POST["id"],
+    "id" => $data->id,
 );
 
 Database::delete($delete);

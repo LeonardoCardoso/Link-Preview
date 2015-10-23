@@ -27,7 +27,6 @@ app.controller('MyControllerDatabase', ['$scope', '$http', '$sce', function ($sc
                 data[i].textHTML = $sce.trustAsHtml(data[i].text);
                 data[i].descriptionHTML = $sce.trustAsHtml(data[i].description);
                 data[i].videoIframeHTML = $sce.trustAsHtml(data[i].videoIframe);
-                console.log(data[i]);
             }
 
             $scope.databasePosts = data;
@@ -37,7 +36,22 @@ app.controller('MyControllerDatabase', ['$scope', '$http', '$sce', function ($sc
     };
 
     $scope.deletePosted = function (post, $index) {
-        $scope.posts.splice($index, 1);
+        $scope.databasePosts.splice($index, 1);
+
+        var url = 'src/link-preview/php/delete.php';
+        var jsonData = angular.toJson({
+            id: post.id
+        });
+
+        $http({
+            url: url,
+            method: "POST",
+            data: "data=" + jsonData,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (data, status, headers, config) {
+
+        });
+
     };
 
     $scope.imageAction = function (post) {

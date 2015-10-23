@@ -1,4 +1,4 @@
-Link Preview (In Development)
+Link Preview
 ==========================
 
 Developed by <a href='https://github.com/LeonardoCardoso' target='_blank'>@LeonardoCardoso</a>. 
@@ -110,7 +110,7 @@ Attributes
 
 
 
-<b>5 &bull; Database</b>
+<b>4 &bull; Database</b>
 
 To custom your database configurations, you need to change the following values in [Database.php](/src/link-preview/php/classes/Database.php)
 
@@ -221,7 +221,7 @@ $ sudo port install php5-curl
 $ sudo apachectl restart
 ```
 
-Also where there is 'src/link-preview/' as part of a path of a <b>Javascript, CSS or image</b> file, 
+Also where there is <b>'src/link-preview/'</b> as part of a path of a <b>Javascript, CSS or image</b> file, 
 you must change to the path on your server.
 
 
