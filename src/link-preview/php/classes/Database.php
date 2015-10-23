@@ -18,10 +18,14 @@ class Database
     {
         $conn = Database::connect();
 
+        $save->text = mysqli_real_escape_string($conn, $save->text);
+        $save->title = mysqli_real_escape_string($conn, $save->title);
+        $save->description = mysqli_real_escape_string($conn, $save->description);
+
         $query =
             "INSERT INTO
               `linkpreview`.`linkpreview`
-              (`id`, `text`, `image`, `title`, `canonicalUrl`, `url`, `pageUrl`, `description`, `iframe`)
+              (`id`, `text`, `image`, `title`, `canonicalUrl`, `url`, `pageUrl`, `description`, `videoIframe`)
               VALUES (NULL, '" . $save->text . "', '" . $save->image . "', '" . $save->title . "', '" . $save->canonicalUrl . "',
               '" . $save->url . "', '" . $save->pageUrl . "', '" . $save->description . "', '" . $save->videoIframe . "')";
 
@@ -71,10 +75,10 @@ class Database
     {
         $conn = Database::connect();
 
-        $sth = mysqli_query($conn, "SELECT * FROM `linkpreview` ORDER BY id DESC");
+        $sth = mysqli_query($conn, "SELECT * FROM `linkpreview`.`linkpreview` ORDER BY id DESC");
 
         $rows = array();
-        while ($r = mysql_fetch_assoc($sth)) {
+        while ($r = mysqli_fetch_assoc($sth)) {
 
             $r["text"] = Highlight::url($r["text"]);
             $r["description"] = Highlight::url($r["description"]);

@@ -15,6 +15,9 @@
 
     <link href="src/link-preview/css/link-preview.css" rel="stylesheet">
     <script src="src/link-preview/js/link-preview.js" type="text/javascript"></script>
+
+    <!-- Include this script below if you want to retrieve the posts inserted to database -->
+    <script src="src/link-preview/js/link-preview-database.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -58,6 +61,17 @@
                       limage="demo/img/loader.gif"
                       bclass="success"/>
     </div>
+
+    <!-- -->
+    <div class="col-sm-4 demo-col-padding">
+    </div>
+    <!-- From Database -->
+    <div class="col-sm-4 demo-col-padding">
+        <?php include "src/link-preview/template/database-template.php"; ?>
+    </div>
+    <div class="col-sm-4 demo-col-padding">
+    </div>
+
 
 </div>
 </body>

@@ -41,7 +41,6 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
             }
         });
 
-
         $(element.find('textarea')[1]).bind({ // Preview description
             keyup: function (e) {
                 if (e.which == 13) {
@@ -63,6 +62,7 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                 scope.noThumbnail = newValues[6];
                 scope.noImage = newValues[7];
             });
+
     };
 
     var defaultValues = function ($scope) {
@@ -265,17 +265,21 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                     }).success(function (data, status, headers, config) {
 
                             // Saving in db
+                            var post = angular.copy(preview);
+
                             if ($scope.noThumbnail) {
-                                preview.image = '';
+                                post.image = '';
                             }
+
+                            post.url = window.btoa(post.url);
+                            post.pageUrl = window.btoa(post.pageUrl);
+                            post.canonicalUrl = window.btoa(post.canonicalUrl);
 
                             var url = 'src/link-preview/php/save.php';
                             var jsonData = angular.toJson({
                                 text: $scope.userTyping,
-                                data: preview
+                                data: post
                             });
-
-                            console.log(jsonData);
 
                             $http({
                                 url: url,

@@ -32,21 +32,24 @@ For mode details, visit http://lab.leocardz.com/link-preview/
 
 ## How to add it to your project
 
-<b>1 &bull; Scripts</b>
+
+<b>1 &bull; Stylesheets</b>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    	
+	<link rel="stylesheet" type="text/css" href="src/link-preview/css/link-preview.css" />
+
+<b>2 &bull; Scripts</b>
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" type="text/javascript"></script>
         
 	<script src="src/link-preview/js/link-preview.js" type="text/javascript"></script>
-
-
-<b>2 &bull; Stylesheets</b>
-
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    	
-	<link rel="stylesheet" type="text/css" href="src/link-preview/css/link-preview.css" />
+	
+    <!-- Include this script below if you want to retrieve the posts inserted to database -->
+    <script src="src/link-preview/js/link-preview-database.js" type="text/javascript"></script>
 	
 
 <b>3 &bull; Configuration</b>
@@ -99,14 +102,41 @@ Attributes
 
 <b>5 &bull; Database</b>
 
-To custom your database configurations, you just need to change the following values in [php/classes/Database.php](https://github.com/LeonardoCardoso/Facebook-Link-Preview/blob/master/php/classes/Database.php)
+To custom your database configurations, you need to change the following values in [Database.php](/src/link-preview/php/classes/Database.php)
 
 		$host = "localhost";
         $user = "";
         $password = "";
         $database = "linkpreview";
         
-Make sure your columns are the same as those ones in [linkpreview.sql](https://github.com/LeonardoCardoso/Link-Preview/blob/master/linkpreview.sql) or customize them.        
+
+Additionally, the way I used to retrieve the data is creating a controller [link-preview-database.js](/src/link-preview/js/link-preview-database.js)
+which you can include the file somehow in your project or you can its content to yours.
+
+	app.controller('MyControllerDatabase', ['$scope', '$http', function ($scope, $http) {
+    
+        $scope.databasePosts = [];
+        $scope.retrieveFromDatabase = function () {
+    
+            var url = 'src/link-preview/php/retrieve.php';
+            $http({
+                url: url,
+                method: "GET",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).success(function (data, status, headers, config) {
+    
+                console.log(data);
+    
+            });
+    
+        };
+        $scope.retrieveFromDatabase();
+    
+    }]);
+    
+Also, check the file [database-template.php](src/link-preview/template/database-template.php) to see an example of how to display the data retrieved from database.    
+       
+Make sure your columns are the same as those ones in [linkpreview.sql](/src/link-preview/linkpreview.sql) or customize them.        
 
 
 ## Result Format

@@ -16,6 +16,10 @@ $data = json_decode(urldecode(base64_decode($_POST["data"])));
 $dataToSave = $data->data;
 $dataToSave->text = $data->text;
 
+$dataToSave->url = urldecode(base64_decode($dataToSave->url));
+$dataToSave->pageUrl = urldecode(base64_decode($dataToSave->pageUrl));
+$dataToSave->canonicalUrl = urldecode(base64_decode($dataToSave->canonicalUrl));
+
 $id = Database::insert($dataToSave);
 if ($id === null || $id === "") {
     echo mysql_error();
