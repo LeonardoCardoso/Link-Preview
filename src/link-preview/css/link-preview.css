@@ -514,3 +514,8 @@
 .lp-vine-fix {
     padding-bottom: 100% !important;
 }
+
+.lp-iframe {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}

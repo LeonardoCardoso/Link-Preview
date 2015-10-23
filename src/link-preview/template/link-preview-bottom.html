@@ -141,7 +141,7 @@
             <img ng-src="{{post.image}}" ng-class="{'lg-display-hide': showIframe == true}">
 
             <span><i class="fa fa-play lp-play lp-bottom"
-                     ng-class="{'lg-display-hide': post.video == false, 'lg-display-hide': showIframe == true}"></i></span>
+                     ng-class="{'lg-display-hide': hidePlay(post)}"></i></span>
 
             <span ng-bind-html="post.videoIframe"
                   ng-class="{'lg-display-hide': showIframe == false}"></span>

@@ -134,7 +134,7 @@
 
         <span class="col-sm-12 lp-span lp-posted-text" ng-bind-html="post.text"></span>
 
-        <span ng-bind-html="post.videoIframe" class="col-sm-12"
+        <span ng-bind-html="post.videoIframe" class="col-sm-12 lp-iframe"
               ng-class="{'lg-display-hide': showIframe == false}"></span>
 
         <div class="col-sm-3 lp-posted-image"
@@ -144,7 +144,7 @@
             <img ng-src="{{post.image}}" ng-class="{'lg-display-hide': showIframe == true}">
 
             <span><i class="fa fa-play lp-play"
-                     ng-class="{'lg-display-hide': post.video == false, 'lg-display-hide': showIframe == true}"></i></span>
+                     ng-class="{'lg-display-hide': hidePlay(post)}"></i></span>
 
         </div>
 

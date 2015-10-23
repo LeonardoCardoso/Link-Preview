@@ -171,8 +171,6 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
                                 $scope.preview.videoIframe = $sce.trustAsHtml(data.videoIframe);
                             }
 
-                            console.log(data);
-
                             $scope.hasEmptyInfo($scope);
 
                             $scope.hidePreview = false;
@@ -285,12 +283,15 @@ app.directive('linkPreview', ['$compile', '$http', '$sce', function ($compile, $
             $scope.imageAction = function (post) {
 
                 if (post.video == false) {
-                    window.open(post.pageUrl,'_blank');
+                    window.open(post.pageUrl, '_blank');
                 } else {
-                    console.log(post);
                     $scope.showIframe = true;
                 }
 
+            };
+
+            $scope.hidePlay = function (post) {
+                return post.video == false || $scope.showIframe == true;
             };
 
         },
