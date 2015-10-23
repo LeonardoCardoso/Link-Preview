@@ -35,13 +35,16 @@ For mode details, visit http://lab.leocardz.com/link-preview/
 
 <b>1 &bull; Stylesheets</b>
 
+```html
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     	
 	<link rel="stylesheet" type="text/css" href="src/link-preview/css/link-preview.css" />
+```
 
 <b>2 &bull; Scripts</b>
 
+```html
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" type="text/javascript"></script>
@@ -50,18 +53,23 @@ For mode details, visit http://lab.leocardz.com/link-preview/
 	
     <!-- Include this script below if you want to retrieve the posts inserted to database -->
     <script src="src/link-preview/js/link-preview-database.js" type="text/javascript"></script>
+```
 	
 
 <b>3 &bull; Configuration</b>
 
 Add the link preview module as a dependency to your application module:
 
+```html
 	var app = angular.module('App', ['linkpreview'])
+```
 	
 
 Add the directive inside your controller html:
 
+```html
 	<link-preview placeholder="What's in your mind?" />
+```
 	
 
 Attributes
@@ -83,6 +91,7 @@ Attributes
 |  	 dtitle  	| 	 defaultTitle	  | 	Enter a title	|         					any string 		     			|
 | ddescription  |  defaultDescription | Enter a description |         					any string 		     			|
 
+```html
 	<link-preview 
 			type="" 
 			ttext="" 
@@ -97,6 +106,7 @@ Attributes
 			cclass=""
 			dtitle="" 
 			ddescription="" />
+```
 
 
 
@@ -104,35 +114,77 @@ Attributes
 
 To custom your database configurations, you need to change the following values in [Database.php](/src/link-preview/php/classes/Database.php)
 
+```php
 		$host = "localhost";
         $user = "";
         $password = "";
         $database = "linkpreview";
+```
         
 
-Additionally, the way I used to retrieve the data is creating a controller [link-preview-database.js](/src/link-preview/js/link-preview-database.js)
+Additionally, the way I used to retrieve the data was creating a controller [link-preview-database.js](/src/link-preview/js/link-preview-database.js)
 which you can include the file somehow in your project or you can its content to yours.
 
+```javascript
 	app.controller('MyControllerDatabase', ['$scope', '$http', function ($scope, $http) {
     
         $scope.databasePosts = [];
-        $scope.retrieveFromDatabase = function () {
-    
-            var url = 'src/link-preview/php/retrieve.php';
-            $http({
-                url: url,
-                method: "GET",
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).success(function (data, status, headers, config) {
-    
-                console.log(data);
-    
-            });
-    
-        };
-        $scope.retrieveFromDatabase();
+            $scope.retrieveFromDatabase = function () {
+        
+                // You must insert in your page a div with the posts retrieved from database. Just like the posts div
+                // on template html files
+        
+                var url = 'src/link-preview/php/retrieve.php';
+                $http({
+                    url: url,
+                    method: "GET",
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).success(function (data, status, headers, config) {
+        
+                    for (var i = 0; i < data.length; i++) {
+                        data[i].video = data[i].videoIframe !== "";
+                        data[i].showIframe = false;
+                        data[i].textHTML = $sce.trustAsHtml(data[i].text);
+                        data[i].descriptionHTML = $sce.trustAsHtml(data[i].description);
+                        data[i].videoIframeHTML = $sce.trustAsHtml(data[i].videoIframe);
+                        console.log(data[i]);
+                    }
+        
+                    $scope.databasePosts = data;
+        
+                });
+        
+            };
+        
+            $scope.deletePosted = function (post, $index) {
+                $scope.posts.splice($index, 1);
+            };
+        
+            $scope.imageAction = function (post) {
+        
+                if (post.video == false) {
+                    window.open(post.pageUrl, '_blank');
+                } else {
+                    post.showIframe = true;
+                }
+        
+            };
+        
+            $scope.hidePlay = function (post) {
+                return post.video == false || post.showIframe == true;
+            };
+        
+            $scope.layoutWithoutImage = function (post) {
+                return post.image == '' || post.showIframe == true;
+            };
+        
+            $scope.layoutWithImage = function (post) {
+                return post.image != '' || (post.video == true && post.showIframe == false);
+            };
+
     
     }]);
+```
     
 Also, check the file [database-template.php](src/link-preview/template/database-template.php) to see an example of how to display the data retrieved from database.    
        
