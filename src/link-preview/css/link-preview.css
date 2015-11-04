@@ -519,3 +519,7 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
+
+.lp-force-100 {
+    width: 100% !important;
+}

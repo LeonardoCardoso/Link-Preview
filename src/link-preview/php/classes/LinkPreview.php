@@ -109,13 +109,13 @@ class LinkPreview
                 }
 
                 $media = $this->getMedia($pageUrl);
-                $images = count($media) == 0 ? array(Content::extendedTrim($metaTags["image"])) : array($media[0]);
+                $images = count($media) == 0 || $media[0] == "" ? array(Content::extendedTrim($metaTags["image"])) : array($media[0]);
                 $videoIframe = $media[1];
 
                 if (count($images) == 0 || $images[0] === "") {
                     $images = Content::getImages($raw, $pageUrl, $imageQuantity);
                 }
-                if ($media != null && $media[0] != "" && $media[1] != "") {
+                if ($media != null && $media[1] != "") {
                     $video = true;
                 }
 
@@ -215,6 +215,8 @@ class LinkPreview
         $media = array();
         if (strpos($pageUrl, "youtube.com") !== false) {
             $media = Media::mediaYoutube($pageUrl);
+        } else if (strpos($pageUrl, "ted.com") !== false) {
+            $media = Media::mediaTED($pageUrl);
         } else if (strpos($pageUrl, "vimeo.com") !== false) {
             $media = Media::mediaVimeo($pageUrl);
         } else if (strpos($pageUrl, "vine.co") !== false) {

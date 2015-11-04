@@ -27,6 +27,27 @@ class Media
         return $media;
     }
 
+    /** Return iframe code for TED videos */
+    static function mediaTED($url)
+    {
+        $url = explode("/", $url);
+        $media = array();
+        if (count($url) > 0) {
+            $url = $url[count($url) - 1];
+            $url = explode("?", $url);
+            if (count($url) > 0) {
+                $url = $url[0];
+                $embed = '<iframe src="https://embed-ssl.ted.com/talks/' . $url . '.html" width="640" height="360" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+                array_push($media, "", '<div class="embed-responsive embed-responsive-16by9">' . $embed . '</div>');
+            } else {
+                array_push($media, "", "");
+            }
+        } else {
+            array_push($media, "", "");
+        }
+        return $media;
+    }
+
     /** Return iframe code for Vine videos */
     static function mediaVine($url)
     {

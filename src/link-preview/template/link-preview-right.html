@@ -138,7 +138,7 @@
               ng-class="{'lg-display-hide': showIframe == false}"></span>
 
         <div class="col-sm-3 lp-posted-image"
-             ng-class="{'lg-display-hide': post.image == '', 'lp-posted-image-iframe': showIframe == true}"
+             ng-class="{'lg-display-hide': post.image == '' || showIframe == true, 'lp-posted-image-iframe': showIframe == true}"
              ng-click="imageAction(post)">
 
             <img ng-src="{{post.image}}" ng-class="{'lg-display-hide': showIframe == true}">
@@ -151,7 +151,7 @@
         <a href="{{post.pageUrl}}" target="_blank">
 
             <div class="lp-posted-wrap"
-                 ng-class="{'col-sm-12': layoutWithoutImage(post), 'col-sm-9': layoutWithImage(post)}">
+                 ng-class="{'col-sm-12': layoutWithoutImage(post), 'col-sm-9': layoutWithImage(post), 'lp-force-100': showIframe == true}">
                 <div class="col-sm-12 lp-posted-title" ng-class="{'lp-posted-title-iframe': layoutWithoutImage(post)}">
                     {{post.title}}
                 </div>
