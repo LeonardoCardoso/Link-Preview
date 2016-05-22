@@ -1,16 +1,10 @@
 Link Preview
 ==========================
 
-Developed by <a href='https://github.com/LeonardoCardoso' target='_blank'>@LeonardoCardoso</a>. 
-
-Follow <a href='https://twitter.com/lc_link_preview' target='_blank'>@lc_link_preview</a> on Twitter to get updates of what sites the people are successfully previewing around the globe.
-
 ## How this works
 
 The algorithm keeps tracking what you are typing in the status field and through regular expressions identifies a url. Thereafter, the text is in the field is passed to PHP that does all the work to analyze all the source code of the url found. If you enter more than one url, it will consider that the first one is the more relevant and it will create a preview.
 Once the source code of the url is obtained, regular expressions begin to seek out and capture relevant informations on it. These informations is basically the title page, the images contained therein, and a brief description of the content covered in the page.
-
-For mode details, visit http://lab.leocardz.com/link-preview/
 
 |						     									      		|		    	  													            | 
 :--------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|	
@@ -225,12 +219,17 @@ Also where there is <b>'src/link-preview/'</b> as part of a path of a <b>Javascr
 you must change to the path on your server.
 
 
-Contact
-=================================
+Information and Contact
+===
 
-Twitter: <a href='https://twitter.com/theleocardz' target='_blank'>@TheLeoCardz</a>
+Developed by [@LeonardoCardoso](https://github.com/LeonardoCardoso). 
 
-Email: contact@leocardz.com
+For more information, please visit [http://lab.leocardz.com/link-preview/](http://lab.leocardz.com/link-preview/).
+
+Contact me either by Twitter [@leocardz](https://twitter.com/leocardz) or emailing me to [contact@leocardz.com](mailto:contact@leocardz.com).
+
+Follow <a href='https://twitter.com/lc_link_preview' target='_blank'>@lc_link_preview</a> on Twitter to get updates of what sites the people are successfully previewing around the globe.
+
 
 
 License
