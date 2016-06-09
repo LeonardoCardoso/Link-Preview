@@ -231,6 +231,11 @@ Contact me either by Twitter [@leocardz](https://twitter.com/leocardz) or emaili
 Follow <a href='https://twitter.com/lc_link_preview' target='_blank'>@lc_link_preview</a> on Twitter to get updates of what sites the people are successfully previewing around the globe.
 
 
+Related Projects
+===
+
+* [Swift Link Preview](https://github.com/LeonardoCardoso/Swift-Link-Preview)
+* [Android Link Preview](https://github.com/LeonardoCardoso/Android-Link-Preview)
 
 License
 =================================
