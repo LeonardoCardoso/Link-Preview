@@ -135,11 +135,11 @@ class LinkPreview
             $videoIframe = $videoIframe == null ? "" : $videoIframe;
 
             $answer = array(
-                "title" => $title,
+                "title" => mb_convert_encoding($title, "UTF-8"),
                 "url" => $finalLink,
                 "pageUrl" => $finalUrl,
                 "canonicalUrl" => Url::canonicalPage($pageUrl),
-                "description" => $description,
+                "description" => mb_convert_encoding($description, "UTF-8"),
                 "image" => $images[0],
                 "images" => $images,
                 "video" => $video,
