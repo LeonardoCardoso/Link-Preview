@@ -139,6 +139,7 @@ class Content
         if (isset($contents)) {
 
             $doc = new DOMDocument('1.0', 'utf-8');
+            $contents = str_replace('<meta charset="UTF-8">', '<meta charset="UTF-8"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">', $contents);
             @$doc->loadHTML($contents);
 
             $metas = $doc->getElementsByTagName('meta');
