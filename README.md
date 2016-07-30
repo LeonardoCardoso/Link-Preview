@@ -228,8 +228,6 @@ For more information, please visit [http://lab.leocardz.com/link-preview/](http:
 
 Contact me either by Twitter [@leocardz](https://twitter.com/leocardz) or emailing me to [contact@leocardz.com](mailto:contact@leocardz.com).
 
-Follow <a href='https://twitter.com/lc_link_preview' target='_blank'>@lc_link_preview</a> on Twitter to get updates of what sites the people are successfully previewing around the globe.
-
 
 Related Projects
 ===
