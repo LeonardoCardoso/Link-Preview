@@ -224,8 +224,6 @@ Information and Contact
 
 Developed by [@LeonardoCardoso](https://github.com/LeonardoCardoso). 
 
-For more information, please visit [http://lab.leocardz.com/link-preview/](http://lab.leocardz.com/link-preview/).
-
 Contact me either by Twitter [@leocardz](https://twitter.com/leocardz) or emailing me to [contact@leocardz.com](mailto:contact@leocardz.com).
 
 
